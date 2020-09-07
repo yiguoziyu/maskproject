@@ -1,5 +1,6 @@
 package com.ljj.lettercircle.model;
 
+
 import com.ljj.commonlib.base.BaseApplication;
 import com.ljj.commonlib.kit.cache.ACache;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by 一锅子鱼 on 2018/11/5.
  */
-public class AccountBean implements Serializable{
+public class AccountBean implements Serializable {
 
     /**
      * user_id : 106042
@@ -47,6 +48,7 @@ public class AccountBean implements Serializable{
      */
     public static String cacheKey = AccountBean.class.getSimpleName();
     private static AccountBean ourInstance;
+
     /**
      * interest_label : [{"id":1,"name":"对旅行的要求","icon_url":"http://bdsm-1256663796.cos.ap-shanghai.myqcloud.com/icon/153111049137507104.png","color":"E2B360","child":[]},{"id":2,"name":"关于我","icon_url":"http://bdsm-1256663796.cos.ap-shanghai.myqcloud.com/icon/153111056556236106.png","color":"E2B360","child":[]},{"id":3,"name":"对性的看法","icon_url":"http://bdsm-1256663796.cos.ap-shanghai.myqcloud.com/icon/15311106106783699.png","color":"E2B360","child":[]}]
      * profession : null
@@ -54,7 +56,6 @@ public class AccountBean implements Serializable{
      * action :
      * list : [{"id":"crown","title":"会员中心","icon":"dating_icon_mine_crown","action":"PzpViewController","des":"永久会员，终身有效"},{"id":"circle","title":"我的动态","icon":"dating_icon_mine_circle","action":"MyCirclesViewController","des":""},{"id":"feedback","title":"意见反馈","icon":"dating_icon_mine_feedback","action":"FeedbackViewController","des":""},{"id":"setting","title":"设置","icon":"dating_icon_mine_setting","action":"SettingViewController","des":""}]
      */
-
 
 
     public static AccountBean getInstance() {
@@ -66,10 +67,12 @@ public class AccountBean implements Serializable{
         }
         return ourInstance;
     }
+
     AccountBean getFromCache() {
         ourInstance = (AccountBean) ACache.get(BaseApplication.application).getAsObject(cacheKey);
         return ourInstance;
     }
+
     public static boolean IsNull() {
         return ourInstance == null;
     }
@@ -139,6 +142,28 @@ public class AccountBean implements Serializable{
     private String wechat;
     private int is_complete;
     private int is_show_distance;
+
+    private int is_privacy_access;
+
+    private int coupon_num;
+    private Long balance;
+    private int has_new_coupon;
+
+    public int getHas_new_coupon() {
+        return has_new_coupon;
+    }
+
+    public void setHas_new_coupon(int has_new_coupon) {
+        this.has_new_coupon = has_new_coupon;
+    }
+
+    public int getIs_privacy_access() {
+        return is_privacy_access;
+    }
+
+    public void setIs_privacy_access(int is_privacy_access) {
+        this.is_privacy_access = is_privacy_access;
+    }
 
     public int getIs_show_distance() {
         return is_show_distance;
@@ -428,7 +453,6 @@ public class AccountBean implements Serializable{
     }
 
 
-
     public String getWechat() {
         return wechat == null ? "" : wechat;
     }
@@ -478,5 +502,21 @@ public class AccountBean implements Serializable{
 
     public void setDating_publish_times(String dating_publish_times) {
         this.dating_publish_times = dating_publish_times;
+    }
+
+    public int getCoupon_num() {
+        return coupon_num;
+    }
+
+    public void setCoupon_num(int coupon_num) {
+        this.coupon_num = coupon_num;
+    }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
     }
 }

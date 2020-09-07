@@ -60,6 +60,58 @@ public class PersonDetailBean {
     private String distance;
     private String unit;
 
+    private int is_risk_warning;
+    private String risk_warning_tip;
+    private List<String> resident_city;
+    private int can_impression;
+    private List<ImpressionBean> impression_list;
+
+    public List<ImpressionBean> getImpression_list() {
+        if (impression_list == null) {
+            return new ArrayList<>();
+        }
+        return impression_list;
+    }
+
+    public void setImpression_list(List<ImpressionBean> impression_list) {
+        this.impression_list = impression_list;
+    }
+
+    public int getIs_risk_warning() {
+        return is_risk_warning;
+    }
+
+    public void setIs_risk_warning(int is_risk_warning) {
+        this.is_risk_warning = is_risk_warning;
+    }
+
+    public String getRisk_warning_tip() {
+        return risk_warning_tip == null ? "" : risk_warning_tip;
+    }
+
+    public void setRisk_warning_tip(String risk_warning_tip) {
+        this.risk_warning_tip = risk_warning_tip;
+    }
+
+    public List<String> getResident_city() {
+        if (resident_city == null) {
+            return new ArrayList<>();
+        }
+        return resident_city;
+    }
+
+    public void setResident_city(List<String> resident_city) {
+        this.resident_city = resident_city;
+    }
+
+    public int getCan_impression() {
+        return can_impression;
+    }
+
+    public void setCan_impression(int can_impression) {
+        this.can_impression = can_impression;
+    }
+
     public String getDistance() {
         return distance == null ? "" : distance;
     }

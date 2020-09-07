@@ -55,6 +55,25 @@ public class PersonBean {
     private String distance;
     private String unit;
 
+    private int photo_num;
+    private String login_time;
+
+    public String getLogin_time() {
+        return login_time == null ? "" : login_time;
+    }
+
+    public void setLogin_time(String login_time) {
+        this.login_time = login_time;
+    }
+
+    public int getPhoto_num() {
+        return photo_num;
+    }
+
+    public void setPhoto_num(int photo_num) {
+        this.photo_num = photo_num;
+    }
+
     public String getDistance() {
         return distance == null ? "" : distance;
     }
