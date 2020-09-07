@@ -1,17 +1,22 @@
 package com.ljj.projectmask
 
+//import com.ljj.lannotation.PageConfig
+//import com.ljj.maskproject.base.BaseViewXActivity
+//@PageConfig(layoutId = R.layout.activity_main)
+//class MainActivity : BaseViewXActivity() {
+//    override fun initData() {
+//
+//    }
+//
+//}
+
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.ljj.lannotation.PageConfig
-import com.ljj.maskproject.base.BaseViewXActivity
-@PageConfig(layoutId = R.layout.activity_main)
-class MainActivity : BaseViewXActivity() {
-    override fun initData() {
+class MainActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
     }
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//    }
 }
