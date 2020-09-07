@@ -2,11 +2,12 @@ package com.ljj.maskproject.viewmodels.request
 
 import androidx.lifecycle.MutableLiveData
 import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
+import com.ljj.lettercircle.model.SimpleUserBean
 import com.ljj.maskproject.ex.launch
 import com.ljj.maskproject.ex.launchWithLoading
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.model.*
+import com.ljj.lettercircle.model.*
 
 class CommonRequestViewModel : BaseViewModel() {
 

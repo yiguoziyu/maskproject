@@ -6,8 +6,9 @@ import com.ihsanbal.logging.LoggingInterceptor
 import com.ljj.commonlib.base.BaseApplication
 import com.ljj.commonlib.net.network.NetUtil
 import com.ljj.commonlib.util.CommonUtil
-import com.ljj.model.GpsLocationBean
-import com.ljj.model.LoginAccountBean
+import com.ljj.lettercircle.model.GpsLocationBean
+import com.ljj.lettercircle.model.LoginAccountBean
+
 
 
 class HeaderInterceptor {

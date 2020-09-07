@@ -6,7 +6,7 @@ import com.ljj.maskproject.ex.launch
 import com.ljj.maskproject.ex.launchWithLoading
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.model.DynamicsBean
+import com.ljj.lettercircle.model.DynamicsBean
 import retrofit2.http.Query
 
 

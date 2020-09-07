@@ -1,8 +1,12 @@
 package com.ljj.maskproject.http.manager
 
 import com.ljj.commonlib.model.BaseResponse
+import com.ljj.lettercircle.model.AuthStateBean
+import com.ljj.lettercircle.model.DatingBroadcastBean
+import com.ljj.lettercircle.model.InviteWithdrawBean
+import com.ljj.lettercircle.model.SimpleUserBean
 import com.ljj.maskproject.http.api.HttpApi
-import com.ljj.model.*
+import com.ljj.lettercircle.model.*
 import retrofit2.http.*
 
 interface ApiSuspendService {

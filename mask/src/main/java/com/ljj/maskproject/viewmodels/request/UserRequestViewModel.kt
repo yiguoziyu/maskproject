@@ -7,9 +7,9 @@ import com.ljj.maskproject.ex.launch
 import com.ljj.maskproject.ex.launchWithLoading
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.model.AccountBean
-import com.ljj.model.LabelBean
-import com.ljj.model.PersonBean
+import com.ljj.lettercircle.model.AccountBean
+import com.ljj.lettercircle.model.LabelBean
+import com.ljj.lettercircle.model.PersonBean
 
 
 /**

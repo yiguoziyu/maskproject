@@ -5,8 +5,8 @@ import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
 import com.ljj.maskproject.ex.launch
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.model.ChatStatusBean
-import com.ljj.model.DatingBroadcastBean
+import com.ljj.lettercircle.model.ChatStatusBean
+import com.ljj.lettercircle.model.DatingBroadcastBean
 
 /**
  * 消息

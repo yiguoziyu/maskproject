@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.model.PersonBean
-import com.ljj.model.PersonDetailBean
+import com.ljj.lettercircle.model.PersonBean
+import com.ljj.lettercircle.model.PersonDetailBean
 
 /**
  * 首页

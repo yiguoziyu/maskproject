@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.model.PayBean
-import com.ljj.model.PayTypeBean
+import com.ljj.lettercircle.model.PayBean
+import com.ljj.lettercircle.model.PayTypeBean
 
 
 /**

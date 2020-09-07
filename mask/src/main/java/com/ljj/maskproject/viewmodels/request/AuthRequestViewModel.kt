@@ -5,10 +5,10 @@ import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
 import com.ljj.maskproject.ex.launch
 import com.ljj.maskproject.ex.launchWithLoading
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.model.AuthBean
-import com.ljj.model.AuthStateBean
-import com.ljj.model.BucketBean
-import com.ljj.model.IdentityAuthBean
+import com.ljj.lettercircle.model.AuthBean
+import com.ljj.lettercircle.model.AuthStateBean
+import com.ljj.lettercircle.model.BucketBean
+import com.ljj.lettercircle.model.IdentityAuthBean
 
 class AuthRequestViewModel : BaseViewModel() {
 

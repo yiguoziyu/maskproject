@@ -3,10 +3,10 @@ package com.ljj.maskproject.http.config;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ljj.commonlib.model.BaseResponse;
-import com.ljj.model.BannedStatusBean;
-import com.ljj.model.BlockedBean;
-import com.ljj.model.IdentityAvatarResultBean;
-import com.ljj.model.PublishDyanmicBean;
+import com.ljj.lettercircle.model.BannedStatusBean;
+import com.ljj.lettercircle.model.BlockedBean;
+import com.ljj.lettercircle.model.IdentityAvatarResultBean;
+import com.ljj.lettercircle.model.PublishDyanmicBean;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
