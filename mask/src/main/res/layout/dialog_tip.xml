@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_bg_white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:text="温馨提示"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_17"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialog_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:layout_marginRight="@dimen/dimen_15"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_15"
+        android:lineSpacingExtra="@dimen/dimen_5"
+        android:text="加入会员后即可解锁高级筛选，立即加入寻找对的人" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:layout_marginBottom="@dimen/dimen_20">
+
+        <Button
+            android:id="@+id/dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginRight="@dimen/dimen_5"
+            android:background="@drawable/tip_cancel"
+            android:text="再等一等"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/dialog_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:background="@drawable/tip_sure"
+            android:text="立即前往"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

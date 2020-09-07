@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="toolbar_bg_color">#FFFFFF</color>
+    <color name="toolbar_title_color">#191919</color>
+    <color name="toolbar_right_color">#191919</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="whiteF5">#F5F5F5</color>
+    <color name="black20">#202020</color>
+    <color name="black40">#434242</color>
+    <color name="black53">#535353</color>
+    <color name="black01">#010101</color>
+    <color name="black08">#080808</color>
+    <color name="black">#000000</color>
+    <color name="gray9B">#8B8B8B</color>
+    <color name="groundColor">#ECECEC</color>
+    <color name="grayDc">#535353</color>
+    <color name="grayF5">#E5E5E5</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#80000000</color>
+    <color name="translucent_white">#00000000</color>
+    <color name="color_f6">#f6f6f6</color>
+    <color name="default_text">#8a000000</color>
+    <color name="red">#ff0000</color>
+    <color name="common_bg">#F5F5F5</color>
+    <color name="toolbar_line">#e1e1e1</color>
+    <color name="common_line">#e1e1e1</color>
+    <color name="galler_bg">#0d0a1c</color>
+    <color name="textColor">#a8a8a8</color>
+    <color name="app_color_f6">#f6f6f6</color>
+
+    <color name="gray">#E5E5E5</color>
+
+
+    <color name="bg_primary_color">#F8F9FB</color>
+    <color name="bg_subhead_color">#F5F5F5</color>
+    <color name="line_color">#e1e1e1</color>
+</resources>

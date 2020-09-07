@@ -1,0 +1,5 @@
+include ':mask'
+include ':app'
+include ':IMKit'
+include ':IMLib'
+rootProject.name = "ProjectMask"

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar"
+    android:background="@color/toolbar_bg_color"
+    android:fitsSystemWindows="true"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageButton
+            android:id="@+id/toolbar_back"
+            android:layout_width="53dp"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:scaleType="center"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/toolbar_title_color"
+            android:textSize="@dimen/text_size_18"
+            tools:text="标题" />
+
+        <TextView
+            android:id="@+id/toolbar_right_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/toolbar_right_color"
+            android:paddingLeft="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_10"
+            android:text="提交"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            />
+        <ImageButton
+            android:id="@+id/toolbar_right_img"
+            android:layout_width="53dp"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_back" />
+    </RelativeLayout>
+</androidx.appcompat.widget.Toolbar>
