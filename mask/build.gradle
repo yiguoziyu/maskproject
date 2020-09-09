@@ -44,21 +44,18 @@ android {
             dirs 'libs'
         }
     }
-    configurations {
-        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
-    }
+
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    implementation 'androidx.core:core-ktx:1.3.1'
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
-    api 'com.github.yiguoziyu:commlibs:2.5'
-    kapt 'com.github.yiguoziyu:commlibs:2.5'
-
+    api 'com.github.yiguoziyu:commlibs:2.6'
+    kapt 'com.github.yiguoziyu:commlibs:2.6'
     //--------------um----------------------------//
     // 下面各SDK根据宿主App是否使用相关业务按需引入。
     // OAID目前为目前国内市场主流的Android Q设备标识，可根据需要选择。
