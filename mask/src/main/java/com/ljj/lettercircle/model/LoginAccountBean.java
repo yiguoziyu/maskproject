@@ -1,144 +1,21 @@
 package com.ljj.lettercircle.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.ljj.commonlib.base.BaseApplication;
-import com.ljj.commonlib.kit.cache.ACache;
+import com.ljj.lannotation.Persistence;
 
 import java.io.Serializable;
 
 /**
  * Created by 一锅子鱼 on 2018/11/5.
  */
+@Persistence
 public class LoginAccountBean implements Serializable {
 
-    /**
-     * user_id : 106042
-     * nick_name : 裴佑冀_3064
-     * nick_name_self :
-     * package : okhttp
-     * is_anchor : 0
-     * is_recommend : 0
-     * recommend_weight : 9999
-     * is_pay_authentication_fee : 0
-     * is_restricted : 0
-     * is_video_authentication : 0
-     * video_authentication_url :
-     * is_fill : 0
-     * is_system : 0
-     * status : 2
-     * register_type : 0
-     * online_state : 4
-     * real_name :
-     * photo_list : []
-     * photo_list_self : null
-     * photo_need_auth : 0
-     * sex : 0
-     * rank_user : 1
-     * mobile : 13957332764
-     * openid :
-     * unionid :
-     * password : 343bf399f0e6d7058b5052d2eb209012
-     * avatar : https://bdsm-1256663796.file.myqcloud.com/avatar/default.jpg
-     * avatar_to_self :
-     * avatar_audit_success : 0
-     * platform : android
-     * location :
-     * location_id : 0
-     * birthday : 0
-     * age : 0
-     * signature : 你不主动，我们之间怎么有故事
-     * signature_to_self :
-     * access_token :
-     * inviter_user_id : 0
-     * bind_invite_time : 0
-     * invite_effective : 1
-     * is_mjh : 1
-     * mjh_reason : 3
-     * is_vip : 0
-     * vip_expire_time : 0
-     * visitor : 0
-     * follow : 0
-     * follower : 0
-     * property :
-     * longitude : 0
-     * latitude : 0
-     * interest_label : null
-     * login_ip : 36.23.125.58
-     * login_time : 2018-11-03 22:45:58
-     * login_addr : 中国 浙江
-     * login_count : 13
-     * touch_live_times : 0
-     * already_touch_user_list : null
-     * register_time : 2018-10-28 10:49:07
-     * version : okhttp/3.11.0
-     * register_version : okhttp/3.11.0/
-     * user_token :
-     * update_time : 2018-11-03 23:20:01
-     * is_cancel_user : 0
-     * is_avatar_check : 0
-     * is_block : 0
-     * block_time : 0
-     * account_block_remark : null
-     * account_block_time : 0
-     * is_has_zfb : 2
-     * uuid :
-     * im_token : e+eLDXSVfwzC6S2infokYjP42r/pYQi0gPYSAYybdjJn1U54HEEmHNhbozVZHPmLQUvGRIRQvrlXa3UONiMHsA==
-     * avatar_is_check : 0
-     * token : 3efd105f4a37fd21d28bf134444b7f3c
-     */
-    public static String cacheKey = LoginAccountBean.class.getSimpleName();
-    private static LoginAccountBean ourInstance;
-    /**
-     * photo_list_self : []
-     * avatar_check_status : 0
-     * province :
-     * annual_income :
-     * height : 0
-     * profession : null
-     * wechat :
-     * digital_code :
-     * is_complete : 0
-     * interest_label : null
-     * login_time : 1547456024
-     * already_touch_user_list : null
-     * register_time : 1547444858
-     * account_block_remark : null
-     * is_pzp : 0
-     * verf_step : 0
-     * data_integrity : 35
-     * action :
-     */
 
     private String province;
     private String annual_income;
     private int height;
     private Object profession;
-    public static LoginAccountBean getInstance() {
-        if (IsNull()) {
-            ourInstance = new LoginAccountBean().getFromCache();
-            if (IsNull()) {
-                ourInstance = new LoginAccountBean();
-            }
-        }
-        return ourInstance;
-    }
-    public static LoginAccountBean getFromCache() {
-        ourInstance = (LoginAccountBean) ACache.get(BaseApplication.application).getAsObject(cacheKey);
-        return ourInstance;
-    }
-    public static boolean IsNull() {
-        return ourInstance == null;
-    }
-
-    public static void writeToCache(LoginAccountBean obj) {
-        ourInstance = obj;
-        ACache.get(BaseApplication.application).put(cacheKey, obj);
-    }
-
-    public static void cleanCache() {
-        ACache.get(BaseApplication.application).remove(cacheKey);
-        ourInstance = null;
-    }
 
     private int user_id;
     private String nick_name;
@@ -826,21 +703,6 @@ public class LoginAccountBean implements Serializable {
         this.token = token;
     }
 
-    public static String getCacheKey() {
-        return cacheKey == null ? "" : cacheKey;
-    }
-
-    public static void setCacheKey(String cacheKey) {
-        LoginAccountBean.cacheKey = cacheKey;
-    }
-
-    public static LoginAccountBean getOurInstance() {
-        return ourInstance;
-    }
-
-    public static void setOurInstance(LoginAccountBean ourInstance) {
-        LoginAccountBean.ourInstance = ourInstance;
-    }
 
     public String getProvince() {
         return province == null ? "" : province;

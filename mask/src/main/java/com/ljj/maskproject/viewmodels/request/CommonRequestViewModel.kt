@@ -8,6 +8,7 @@ import com.ljj.maskproject.ex.launchWithLoading
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
 import com.ljj.lettercircle.model.*
+import com.ljj.maskproject.viewmodels.global.CommonGlobalViewModel
 
 class CommonRequestViewModel : BaseViewModel() {
 
@@ -56,6 +57,17 @@ class CommonRequestViewModel : BaseViewModel() {
     private val _setDistanceShow by lazy { MutableLiveData<Any>() }
     val setDistanceShow get() = _setDistanceShow
 
+
+    private val _cloaking by lazy { MutableLiveData<Any>() }
+    val cloaking get() = _cloaking
+
+
+//    private val _addToBlacklist by lazy { MutableLiveData<Any>() }
+//    val addToBlacklist get() = _addToBlacklist
+//
+//    private val _removeFromBlacklist by lazy { MutableLiveData<String>() }
+//    val removeFromBlacklist get() = _removeFromBlacklist
+
     fun getBannerList() {
         launch({
             ApiRepository().getBannerList()
@@ -84,13 +96,17 @@ class CommonRequestViewModel : BaseViewModel() {
     fun careUser(userId: String) {
         launchWithLoading({
             ApiRepository().careUser(userId)
-        }, liveData = _careUser)
+        }, {
+            CommonGlobalViewModel.getPersonLikeLiveData().postValue(userId)
+        })
     }
 
     fun careUserDelete(userId: String) {
         launchWithLoading({
             ApiRepository().careUserDelete(userId)
-        }, liveData = _careUserDelete)
+        },{
+            CommonGlobalViewModel.getPersonLikeUnLiveData().postValue(userId)
+        })
     }
 
     fun userWechat(to_user_id: String) {
@@ -137,16 +153,60 @@ class CommonRequestViewModel : BaseViewModel() {
         }, liveData = _punishmentBanner)
     }
 
-    fun logOff(content: String = "注销账号") {
+    fun logOff(mutableList: MutableList<TextState>, content: String) {
+        var remark = ""
+        mutableList.forEach {
+            if (it.isSelect) {
+                remark += it.content + ";"
+            }
+        }
+        remark += content
+        val realRemark = if (remark.isEmpty()) {
+            null
+        } else {
+            remark
+        }
         launchWithLoading({
-            ApiRepository().logOff(content)
+            ApiRepository().logOff(realRemark)
         }, liveData = _logOff)
+
     }
 
     fun setDistanceShow(status: String?) {
         launchWithLoading({
             ApiRepository().setDistanceShow(status)
         }, liveData = _setDistanceShow)
+    }
+
+
+    fun cloaking(state: Int) {
+        launchWithLoading({
+            ApiRepository().cloaking(state)
+        }, {
+            _cloaking.value = it
+        })
+    }
+
+    /**
+     * 取消拉黑
+     */
+    fun removeFromBlacklist(userId: String) {
+        launchWithLoading({
+            ApiRepository().removeFromBlacklist(userId)
+        }, {
+            CommonGlobalViewModel.getBlackRemoveLiveData().postValue(userId)
+        })
+    }
+
+    /**
+     * 拉黑
+     */
+    fun addToBlacklist(userId: String) {
+        launchWithLoading({
+            ApiRepository().addToBlacklist(userId)
+        }, {
+            CommonGlobalViewModel.getBlackAddLiveData().postValue(userId)
+        })
     }
 
 }

@@ -215,6 +215,10 @@ class HttpApi {
         /***充值***/
         const val rechargeUrl = "pyed/recg"
 
+        /*** 充值--- 可使用优惠券版本***/
+        const val recgWithCouponUrl = "pyed/recgWithCoupon"
+
+        const val payTypeNewUrl = "pyed/info"
         //-----------------------------------------auth---------------------------------------------//
         /***获取腾讯云临时密钥***/
         const val getCAMTokenUrl = "user/getCAMToken"
@@ -265,6 +269,9 @@ class HttpApi {
 
         /***判断动态次数***/
         const val canPublish = "dynamics/can_publish"
+
+        /***动态详情***/
+        const val dynamicDetail = "dynamics/info"
 
         /***修改用户备注***/
         const val updateNotesUrl = "user/updateNotes"

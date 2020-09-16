@@ -1,5 +1,7 @@
 package com.ljj.maskproject.base
 
+import androidx.recyclerview.widget.RecyclerView
+import com.ljj.commonlib.jectpack.paging.BaseListInterface
 import com.ljj.commonlib.jectpack.paging.PAGE_FIRST
 import com.ljj.commonlib.ui.recyclerview.adapter.BaseListAdpater
 import com.ljj.maskproject.R
@@ -9,10 +11,11 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener
 import kotlinx.android.synthetic.main.base_listx.*
 
-abstract class BaseListXActivity : BaseViewXActivity() {
+abstract class BaseListXActivity : BaseViewXActivity(), BaseListInterface {
     companion object {
         private const val TAG = "BaseListXActivity"
     }
+
     var mPage = PAGE_FIRST
     private var rvRefreshlayout: SmartRefreshLayout? = null
     private var rvStatelayout: StateLayout? = null
@@ -26,6 +29,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     override fun getLayoutId(): Int {
         return R.layout.base_listx
     }
+
     open fun bindRefreshLayout(): SmartRefreshLayout? = rv_refreshlayout
     open fun bindStateLayout(): StateLayout? = rv_statelayout
     override fun initData() {
@@ -34,8 +38,9 @@ abstract class BaseListXActivity : BaseViewXActivity() {
         rvRefreshlayout?.setOnMultiPurposeListener(object : SimpleMultiPurposeListener() {
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 super.onRefresh(refreshLayout)
-                onRefresh(mEnableRefresh,mEnableLoad)
+                onRefresh(mEnableRefresh, mEnableLoad)
             }
+
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 super.onLoadMore(refreshLayout)
                 onLoad()
@@ -46,7 +51,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     /**
      * 新增数据
      */
-    fun <T> addData(adpater: BaseListAdpater<T>, index: Int, data: T) {
+    override fun <T> addData(adpater: BaseListAdpater<T>, index: Int, data: T) {
         adpater.addData(index, data)
         checkDataEmpty(adpater.dataList)
     }
@@ -54,7 +59,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     /**
      * 新增数据
      */
-    fun <T> addData(adpater: BaseListAdpater<T>, data: T) {
+    override fun <T> addData(adpater: BaseListAdpater<T>, data: T) {
         adpater.addData(data)
         checkDataEmpty(adpater.dataList)
     }
@@ -62,7 +67,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     /**
      * 删除数据
      */
-    fun <T> removeData(adpater: BaseListAdpater<T>, data: T) {
+    override fun <T> removeData(adpater: BaseListAdpater<T>, data: T) {
         val index = adpater.dataList.indexOf(data)
         if (index >= 0) {
             adpater.removeData(data)
@@ -74,7 +79,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     /**
      * 根据集合设置View
      */
-    fun <T> checkDataEmpty(dataList: MutableList<T>) {
+    override fun <T> checkDataEmpty(dataList: MutableList<T>) {
         if (dataList.size == 0) {
             rvStatelayout?.showEmptyView()
         } else {
@@ -85,7 +90,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     /**
      * 刷新所有数据
      */
-    fun <T> setDataNotify(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
+    override fun <T> setDataNotify(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
         checkDataEmpty(dataList)
         adpater.setData(dataList)
     }
@@ -107,7 +112,11 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     /**
      * 设置数据
      */
-    fun <T> setData(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
+    override fun <T> setData(
+        adpater: BaseListAdpater<T>,
+        dataList: MutableList<T>,
+        rv: RecyclerView?
+    ) {
         if (mPage == PAGE_FIRST) {
             rvRefreshlayout?.finishRefresh()
             if (dataList.size == 0) {
@@ -115,6 +124,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
                 rvRefreshlayout?.finishLoadMoreWithNoMoreData()
             } else {
                 adpater.setData(dataList)
+                rv?.scrollToPosition(0)
                 rvStatelayout?.showContentView()
             }
         } else {
@@ -130,7 +140,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
     /**
      * 设置嵌套的数据
      */
-    fun <T> setMultipleData(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
+    override fun <T> setMultipleData(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
         if (mPage == PAGE_FIRST) {
             if (dataList.size == 0) {
                 rvStatelayout?.showEmptyView()
@@ -155,7 +165,7 @@ abstract class BaseListXActivity : BaseViewXActivity() {
         onLoadData()
     }
 
-    open fun onRefresh(enableRefresh: Boolean = true, enableLoad: Boolean = true) {
+    override fun onRefresh(enableRefresh: Boolean, enableLoad: Boolean) {
         mPage = PAGE_FIRST
         mEnableRefresh = enableRefresh
         mEnableLoad = enableLoad
@@ -169,8 +179,13 @@ abstract class BaseListXActivity : BaseViewXActivity() {
         onLoadData()
     }
 
-    open fun onLoadData() {
+    override fun onLoadData() {
 
+    }
+
+
+    override fun onRefreshWithAnimator() {
+        rvRefreshlayout?.autoRefresh()
     }
 
 

@@ -1,8 +1,8 @@
 package com.ljj.lettercircle.model;
 
 
-import com.ljj.commonlib.base.BaseApplication;
-import com.ljj.commonlib.kit.cache.ACache;
+
+import com.ljj.lannotation.Persistence;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,82 +11,8 @@ import java.util.List;
 /**
  * Created by 一锅子鱼 on 2018/11/5.
  */
+@Persistence
 public class AccountBean implements Serializable {
-
-    /**
-     * user_id : 106042
-     * nick_name : 裴佑冀_3064
-     * is_pay_authentication_fee : 0
-     * is_video_authentication : 0
-     * video_authentication_url :
-     * online_state : 1
-     * photo_list : []
-     * sex : 0
-     * avatar : https://bdsm-1256663796.file.myqcloud.com/avatar/default.jpg
-     * location :
-     * age : 0
-     * is_vip : 0
-     * property :
-     * interest_label : null
-     * signature : 你不主动，我们之间怎么有故事
-     * status : 2
-     * vip_expire_time : 0
-     * follow : 0
-     * visitor : 0
-     * follower : 0
-     * is_fill : 0
-     * is_mjh : 1
-     * birthday : 0
-     * data_integrity : 35
-     * im_token : e+eLDXSVfwzC6S2infokYjP42r/pYQi0gPYSAYybdjJn1U54HEEmHNhbozVZHPmLQUvGRIRQvrlXa3UONiMHsA==
-     * has_new_visit : 0
-     * has_new_follower : 0
-     * able_to_set_sex : 0
-     * photo_num_limit : 25
-     * background_img : https://bdsm-1256663796.cos.ap-shanghai.myqcloud.com/background/background.png
-     * vip_expire_time_str : 去开通
-     */
-    public static String cacheKey = AccountBean.class.getSimpleName();
-    private static AccountBean ourInstance;
-
-    /**
-     * interest_label : [{"id":1,"name":"对旅行的要求","icon_url":"http://bdsm-1256663796.cos.ap-shanghai.myqcloud.com/icon/153111049137507104.png","color":"E2B360","child":[]},{"id":2,"name":"关于我","icon_url":"http://bdsm-1256663796.cos.ap-shanghai.myqcloud.com/icon/153111056556236106.png","color":"E2B360","child":[]},{"id":3,"name":"对性的看法","icon_url":"http://bdsm-1256663796.cos.ap-shanghai.myqcloud.com/icon/15311106106783699.png","color":"E2B360","child":[]}]
-     * profession : null
-     * birthday : 638899200
-     * action :
-     * list : [{"id":"crown","title":"会员中心","icon":"dating_icon_mine_crown","action":"PzpViewController","des":"永久会员，终身有效"},{"id":"circle","title":"我的动态","icon":"dating_icon_mine_circle","action":"MyCirclesViewController","des":""},{"id":"feedback","title":"意见反馈","icon":"dating_icon_mine_feedback","action":"FeedbackViewController","des":""},{"id":"setting","title":"设置","icon":"dating_icon_mine_setting","action":"SettingViewController","des":""}]
-     */
-
-
-    public static AccountBean getInstance() {
-        if (IsNull()) {
-            ourInstance = new AccountBean().getFromCache();
-            if (IsNull()) {
-                ourInstance = new AccountBean();
-            }
-        }
-        return ourInstance;
-    }
-
-    AccountBean getFromCache() {
-        ourInstance = (AccountBean) ACache.get(BaseApplication.application).getAsObject(cacheKey);
-        return ourInstance;
-    }
-
-    public static boolean IsNull() {
-        return ourInstance == null;
-    }
-
-    public static void writeToCache(AccountBean obj) {
-        ourInstance = obj;
-        ACache.get(BaseApplication.application).put(cacheKey, obj);
-    }
-
-    public static void cleanCache() {
-        ACache.get(BaseApplication.application).remove(cacheKey);
-        ourInstance = null;
-    }
-
     private int user_id;
     private String nick_name;
     private int verf_step;
@@ -148,6 +74,8 @@ public class AccountBean implements Serializable {
     private int coupon_num;
     private Long balance;
     private int has_new_coupon;
+
+    private List<String> resident_city;
 
     public int getHas_new_coupon() {
         return has_new_coupon;
@@ -518,5 +446,16 @@ public class AccountBean implements Serializable {
 
     public void setBalance(Long balance) {
         this.balance = balance;
+    }
+
+    public List<String> getResident_city() {
+        if (resident_city == null) {
+            return new ArrayList<>();
+        }
+        return resident_city;
+    }
+
+    public void setResident_city(List<String> resident_city) {
+        this.resident_city = resident_city;
     }
 }

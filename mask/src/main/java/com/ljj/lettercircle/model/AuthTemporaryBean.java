@@ -1,5 +1,7 @@
 package com.ljj.lettercircle.model;
 
+import java.io.File;
+
 /**
  * Created by 一锅子鱼 on 2019/5/5.
  */

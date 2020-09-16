@@ -14,6 +14,9 @@ object DynamicGlobalViewModel : GlobalViewModel() {
     private const val KEY_DYNAMIC_LIKE_NUMBER = "dynamic_like_number"
     private const val KEY_DYNAMIC_REFRESH = "dynamic_refresh"
     private const val KEY_DYNAMIC_LIKE = "dynamic_like"
+    private const val KEY_DYNAMIC_TOP = "dynamic_top"
+    private const val KEY_DYNAMIC_VIDEO_URL = "dynamic_video_url"
+    private const val KEY_DYNAMIC_FILTER = "dynamic_filter"
 
     //动态点赞
     fun getDyanmicPraiseLiveData() = LiveDataBus.with<String>(KEY_DYNAMIC_PRAISE)
@@ -38,4 +41,13 @@ object DynamicGlobalViewModel : GlobalViewModel() {
 
     //动态点赞
     fun getDynamicLikeLiveData() = LiveDataBus.with<String>(KEY_DYNAMIC_LIKE)
+
+    //回到顶部
+    fun getDynamicTopLiveData() = LiveDataBus.with<Any>(KEY_DYNAMIC_TOP)
+
+    //视频回调
+    fun getDynamicVideoUrlLiveData() = LiveDataBus.with<String>(KEY_DYNAMIC_VIDEO_URL)
+
+    //动态筛选
+    fun getDynamicFilterLiveData() = LiveDataBus.with<Int>(KEY_DYNAMIC_FILTER)
 }

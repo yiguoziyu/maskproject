@@ -1,43 +1,11 @@
 package com.ljj.lettercircle.model;
 
-import com.ljj.commonlib.base.BaseApplication;
-import com.ljj.commonlib.kit.cache.ACache;
+import com.ljj.lannotation.Persistence;
 
 import java.io.Serializable;
 
+@Persistence
 public class BucketBean implements Serializable {
-
-    public static String cacheKey = BucketBean.class.getSimpleName();
-    private static BucketBean ourInstance;
-
-    public static BucketBean getInstance() {
-        if (IsNull()) {
-            ourInstance = new BucketBean().getFromCache();
-            if (IsNull()) {
-                ourInstance = new BucketBean();
-            }
-        }
-        return ourInstance;
-    }
-
-    BucketBean getFromCache() {
-        ourInstance = (BucketBean) ACache.get(BaseApplication.application).getAsObject(cacheKey);
-        return ourInstance;
-    }
-
-    public static boolean IsNull() {
-        return ourInstance == null;
-    }
-
-    public static void writeToCache(BucketBean obj) {
-        ourInstance = obj;
-        ACache.get(BaseApplication.application).put(cacheKey, obj);
-    }
-
-    public static void cleanCache() {
-        ACache.get(BaseApplication.application).remove(cacheKey);
-        ourInstance = null;
-    }
 
     /**
      * credentials : {"sessionToken":"a01056b1e547ba1b0ee93d98be3c1db55244651030001","tmpSecretId":"AKIDJa3OKKhjnYo75apL25q6XN3erWqGBVMG","tmpSecretKey":"j5jJKxKjkHtqpixds733JTc7MH7oMFKb"}

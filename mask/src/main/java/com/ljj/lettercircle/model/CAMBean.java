@@ -1,47 +1,14 @@
 package com.ljj.lettercircle.model;
 
-
-
-import com.ljj.commonlib.base.BaseApplication;
-import com.ljj.commonlib.kit.cache.ACache;
+import com.ljj.lannotation.Persistence;
 
 import java.io.Serializable;
 
 /**
  * Created by 一锅子鱼 on 2018/11/29.
  */
+@Persistence
 public class CAMBean implements Serializable {
-    public static String cacheKey = CAMBean.class.getSimpleName();
-    private static CAMBean ourInstance;
-
-    public static CAMBean getInstance() {
-        if (IsNull()) {
-            ourInstance = new CAMBean().getFromCache();
-            if (IsNull()) {
-                ourInstance = new CAMBean();
-            }
-        }
-        return ourInstance;
-    }
-
-    CAMBean getFromCache() {
-        ourInstance = (CAMBean) ACache.get(BaseApplication.application).getAsObject(cacheKey);
-        return ourInstance;
-    }
-
-    public static boolean IsNull() {
-        return ourInstance == null;
-    }
-
-    public static void writeToCache(CAMBean obj) {
-        ourInstance = obj;
-        ACache.get(BaseApplication.application).put(cacheKey, obj);
-    }
-
-    public static void cleanCache() {
-        ACache.get(BaseApplication.application).remove(cacheKey);
-        ourInstance = null;
-    }
 
     /**
      * credentials : {"sessionToken":"037762f1f976fde0d3fecbc41957cbbe8af20bd530001","tmpSecretId":"AKIDc5xJhV9urt1x4Tc8NU1IwzwRPms86nqy","tmpSecretKey":"qxN0b07eztwN5syvD4RGx10wZFwaLHk7"}

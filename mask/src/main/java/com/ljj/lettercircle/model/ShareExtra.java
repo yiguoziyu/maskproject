@@ -91,7 +91,7 @@ public class ShareExtra implements Serializable {
         }
     }
 
-    public class ShareTextItem {
+    public class ShareTextItem implements Serializable{
         private String value;
         private int x;
         private int y;

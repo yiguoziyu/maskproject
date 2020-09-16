@@ -1,5 +1,10 @@
 package com.ljj.lettercircle.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by 一锅子鱼 on 2019/1/21.
  */

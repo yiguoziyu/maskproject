@@ -11,6 +11,15 @@ import retrofit2.http.*
 
 interface ApiSuspendService {
 
+    //-----------------------------------------Coupon---------------------------------------------//
+
+    /***自动发放优惠券***/
+    @GET(HttpApi.autoGift)
+    suspend fun autoGift(): BaseResponse<Any>
+
+    /***获取我所有的优惠券***/
+    @GET(HttpApi.getCouponList)
+    suspend fun getCouponList(@Query("status") status: String): BaseResponse<MutableList<CouponBean>>
     //-----------------------------------------share---------------------------------------------//
     /***获取提现相关信息***/
     @GET(HttpApi.withdrawInfo)
@@ -41,16 +50,7 @@ interface ApiSuspendService {
 
     /***邀请收入列表***/
     @GET(HttpApi.inviteIncomeList)
-    suspend fun inviteIncomeList(@Query("page") currentPage: Int): BaseResponse<Any>
-
-    /***获取我所有的优惠券***/
-    @GET(HttpApi.getCouponList)
-    suspend fun getCouponList(@Query("status") status: String): BaseResponse<Any>
-
-    /****获取商品可用优惠券****/
-    @GET(HttpApi.getCanUseCouponList)
-    suspend fun getCanUseCouponList(@Query("product_id") product_id: String): BaseResponse<Any>
-
+    suspend fun inviteIncomeList(@Query("page") currentPage: Int): BaseResponse<MutableList<InviteRecordBean>>
 
 
     //-----------------------------------------report---------------------------------------------//
@@ -131,10 +131,17 @@ interface ApiSuspendService {
     suspend fun punishmentBanner(): BaseResponse<MutableList<BannerBean>>
 
     @PUT(HttpApi.logOffUrl)
-    suspend fun logOff(@Query("content") content: String = "注销账号"): BaseResponse<Any>
+    suspend fun logOff(@Query("content") content: String, @Query("remark") remark: String?): BaseResponse<Any>
 
     @POST(HttpApi.setDistanceShow)
     suspend fun setDistanceShow(@Query("status") status: String?): BaseResponse<Any>
+
+    @POST(HttpApi.addToBlacklist)
+    suspend fun addToBlacklist(@Query("black_user_id") userId: String): BaseResponse<Any>
+
+    @DELETE(HttpApi.removeFromBlacklist)
+    suspend fun removeFromBlacklist(@Query("black_user_id") userId: String): BaseResponse<Any>
+
 
     //-----------------------------------------auth---------------------------------------------//
     @POST(HttpApi.getCAMTokenUrl)
@@ -170,7 +177,6 @@ interface ApiSuspendService {
     suspend fun authenticationInfo(): BaseResponse<IdentityAuthBean>
 
 
-
     //-----------------------------------------pay---------------------------------------------//
 
     @GET(HttpApi.payTypeUrl)
@@ -179,12 +185,15 @@ interface ApiSuspendService {
     @POST(HttpApi.rechargeUrl)
     suspend fun recharge(
         @Query("recg_id") goodId: Int,
-        @Query("pyed_way") pay_way: Int,
+        @Query("pyed_way") pay_way: String,
         @Query("platform") platform: String
     ): BaseResponse<PayBean>
 
+    @POST(HttpApi.recgWithCouponUrl)
+    suspend fun recgWithCoupon(@Query("recg_id") goodId: String, @Query("pyed_way") pay_way: String, @Query("platform") platform: String, @Query("coupon_id") coupon_id: String?): BaseResponse<PayBean>
 
-
+    @GET(HttpApi.payTypeNewUrl)
+    suspend fun getPayTypeNew(@Query("type") type: String): BaseResponse<PayTypeBean>
     //-----------------------------------------login-------------------------------------------- -//
     @GET(HttpApi.visitorHomeUrl)
     suspend fun visitorHome(
@@ -193,7 +202,7 @@ interface ApiSuspendService {
     ): BaseResponse<MutableList<PersonBean>>
 
     @GET(HttpApi.visitorHomePageUrl)
-    suspend fun visitorHomePage(@Query("h_user_id") uId: String): BaseResponse<PersonDetailBean>
+    suspend fun visitorHomePage(@Query("h_user_id") uId: String?): BaseResponse<PersonDetailBean>
 
     @GET(HttpApi.vistorDynamicsUrl)
     suspend fun visitorDynamics(
@@ -207,7 +216,9 @@ interface ApiSuspendService {
     @POST(HttpApi.sendSmsCodeUrl)
     suspend fun sendSmsCode(
         @Query("phone") phone: String,
-        @Query("action") action: String
+        @Query("action") action: String,
+        @Query("ticket") ticket: String?,
+        @Query("randStr") randStr: String?
     ): BaseResponse<Any>
 
     @POST(HttpApi.registerUrl)
@@ -261,6 +272,10 @@ interface ApiSuspendService {
     @GET(HttpApi.getUserInfoUrl)
     suspend fun getUserInfo(): BaseResponse<AccountBean>
 
+    @FormUrlEncoded
+    @PUT(HttpApi.setResidentCity)
+    suspend fun setResidentCity(@Field("citys[]") citys: MutableList<String>): BaseResponse<Any>
+
     @PUT(HttpApi.updateUserSexUrl)
     suspend fun updateUserSex(@Query("sex") sex: String): BaseResponse<Any>
 
@@ -293,6 +308,9 @@ interface ApiSuspendService {
 
     @PUT(HttpApi.labelUrl)
     suspend fun updateLabel(@QueryMap labelList: HashMap<String, String>): BaseResponse<Any>
+
+    @PUT(HttpApi.cloaking)
+    suspend fun cloaking(@Query("status") state: Int): BaseResponse<Any>
     //-----------------------------------------home---------------------------------------------//
 
     @GET(HttpApi.homePageUrl)
@@ -307,9 +325,13 @@ interface ApiSuspendService {
     ): BaseResponse<List<PersonBean>>
 
     @GET(HttpApi.userHomePageUrl)
-    suspend fun getPersionDeatil(@Query("h_user_id") userId: String): BaseResponse<PersonDetailBean>
+    suspend fun getPersionDeatil(@Query("h_user_id") userId: String?): BaseResponse<PersonDetailBean>
 
+    @GET(HttpApi.impression)
+    suspend fun impression(@Query("to_user_id") userId: String?): BaseResponse<MutableList<ImpressionBean>>
 
+    @POST(HttpApi.impression)
+    suspend fun setImpression(@Query("to_user_id") userId: String?, @Query("id") id: Int): BaseResponse<Any>
     //-----------------------------------------message---------------------------------------------//
 
     @GET(HttpApi.checkCanInitiateChatUrl)
@@ -353,11 +375,23 @@ interface ApiSuspendService {
     suspend fun dynamicsVideoPublish(
         @Query("content") content: String?,
         @Query("cover_url") cover_url: String?,
-        @Query("video_url") video_url: String?
+        @Query("video_url") video_url: String?,
+        @Query("publish_city") city: String?
     ): BaseResponse<Any>
 
     @GET(HttpApi.canPublish)
     suspend fun canPublish(): BaseResponse<Any>
+
+    @GET(HttpApi.dynamicDetail)
+    suspend fun dynamicDetail(@Query("dynamics_id") dynamicId: String): BaseResponse<DynamicsBean>
+
+    @FormUrlEncoded
+    @POST(HttpApi.dynamicsPublishUrl)
+    suspend fun dynamicsPublish(
+        @Query("content") dynamics_content: String,
+        @Field("photo_list[]") dynamics_photo: MutableList<String>,
+        @Query("publish_city") city: String?
+    ): BaseResponse<Any>
 
     //-----------------------------------------dating---------------------------------------------//
     @GET(HttpApi.datingListUrl)
@@ -419,6 +453,5 @@ interface ApiSuspendService {
 
     @GET(HttpApi.datingStatisticsUrl)
     suspend fun datingStatistics(): BaseResponse<DatingStaticticsBean>
-
 
 }

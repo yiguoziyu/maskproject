@@ -9,6 +9,11 @@ private const val PLATFORM = "android"
 open class ApiRepository() {
     private fun http(): ApiSuspendService = RetrofitSuspendManager.getService()
 
+    //-----------------------------------------Coupon---------------------------------------------//
+    suspend fun autoGift() = http().autoGift()
+
+    /***获取我所有的优惠券***/
+    suspend fun getCouponList(@Query("status") status: String) = http().getCouponList(status)
     //-----------------------------------------share---------------------------------------------//
     /***获取提现相关信息***/
     suspend fun withdrawInfo() = http().withdrawInfo()
@@ -34,14 +39,6 @@ open class ApiRepository() {
     /***邀请收入列表***/
     suspend fun inviteIncomeList(@Query("page") currentPage: Int) =
         http().inviteIncomeList(currentPage)
-
-    /***获取我所有的优惠券***/
-    suspend fun getCouponList(@Query("status") status: String) = http().getCouponList(status)
-
-    /****获取商品可用优惠券****/
-    suspend fun getCanUseCouponList(@Query("product_id") product_id: String) =
-        http().getCanUseCouponList(product_id)
-
 
     //-----------------------------------------common---------------------------------------------//
     suspend fun getBannerList() = http().getBannerList()
@@ -74,9 +71,13 @@ open class ApiRepository() {
 
     suspend fun punishmentBanner() = http().punishmentBanner()
 
-    suspend fun logOff(@Query("content") content: String = "注销账号") = http().logOff(content)
+    suspend fun logOff(remark: String?) = http().logOff("注销账号", remark)
 
     suspend fun setDistanceShow(@Query("status") status: String?) = http().setDistanceShow(status)
+
+    suspend fun addToBlacklist(userId: String) = http().addToBlacklist(userId)
+
+    suspend fun removeFromBlacklist(userId: String) = http().removeFromBlacklist(userId)
     //-----------------------------------------report---------------------------------------------//
 
     suspend fun feedback(
@@ -138,18 +139,23 @@ open class ApiRepository() {
 
     suspend fun recharge(
         @Query("recg_id") goodId: Int,
-        @Query("pyed_way") pay_way: Int,
+        @Query("pyed_way") pay_way: String,
         @Query("platform") platform: String
     ) = http().recharge(goodId, pay_way, platform)
 
+    suspend fun recgWithCoupon(recg_id: String, pyed_way: String, coupon_id: String?) = http().recgWithCoupon(recg_id, pyed_way, PLATFORM, coupon_id)
 
+
+    suspend fun getPayTypeNew(type: String) = http().getPayTypeNew(type)
+
+    suspend fun recharge(goodId: Int, pay_way: String) = http().recharge(goodId, pay_way, PLATFORM)
     //-----------------------------------------login-------------------------------------------- -//
     suspend fun visitorHome(
         @Query("sex") sex: Int,
         @Query("page") currentPage: Int
     ) = http().visitorHome(sex, currentPage)
 
-    suspend fun visitorHomePage(@Query("h_user_id") uId: String) = http().visitorHomePage(uId)
+    suspend fun visitorHomePage(@Query("h_user_id") uId: String?) = http().visitorHomePage(uId)
 
     suspend fun visitorDynamics(
         @Query("h_user_id") uId: String,
@@ -160,8 +166,8 @@ open class ApiRepository() {
 
     suspend fun sendSmsCode(
         @Query("phone") phone: String,
-        @Query("action") action: String
-    ) = http().sendSmsCode(phone, action)
+        @Query("action") action: String, ticket: String?, randStr: String?
+    ) = http().sendSmsCode(phone, action, ticket, randStr)
 
     suspend fun register(
         @Query("phone") phone: String,
@@ -170,13 +176,12 @@ open class ApiRepository() {
         @Query("password") password: String
     ) = http().register(phone, smsCode, platform, password)
 
-
+    suspend fun register(phone: String, smsCode: String) = http().register(phone, smsCode, PLATFORM, phone)
     suspend fun loginByWx(
-        @Query("platform") platform: String,
         @Query("unionid") unionid: String,
         @Query("openid") openid: String,
         @Query("access_token") access_token: String
-    ) = http().loginByWx(platform, unionid, openid, access_token)
+    ) = http().loginByWx(PLATFORM, unionid, openid, access_token)
 
     suspend fun loginByFast(@Query("accessToken") accessToken: String?) =
         http().loginByFast(accessToken)
@@ -207,6 +212,8 @@ open class ApiRepository() {
 
     //-----------------------------------------account---------------------------------------------//
     suspend fun getUserInfo() = http().getUserInfo()
+
+    suspend fun setResidentCity(citys: MutableList<String>) = http().setResidentCity(citys)
 
     suspend fun updateUserSex(@Query("sex") sex: String) = http().updateUserSex(sex)
 
@@ -248,6 +255,8 @@ open class ApiRepository() {
 
     suspend fun updateLabel(@QueryMap labelList: HashMap<String, String>) =
         http().updateLabel(labelList)
+
+    suspend fun cloaking(state: Int) = http().cloaking(state)
     //-----------------------------------------home---------------------------------------------//
 
     suspend fun getHomePageData(
@@ -260,10 +269,12 @@ open class ApiRepository() {
         @Query("sort") sort: String?
     ) = http().getHomePageData(action, currentPage, age, sex, annual_income, city, sort)
 
-    suspend fun getPersionDeatil(@Query("h_user_id") userId: String) =
+    suspend fun getPersionDeatil(@Query("h_user_id") userId: String?) =
         http().getPersionDeatil(userId)
 
+    suspend fun impression(userId: String?) = http().impression(userId)
 
+    suspend fun setImpression(userId: String?, id: Int) = http().setImpression(userId, id)
     //-----------------------------------------message---------------------------------------------//
 
     suspend fun checkCanInitiateChat(@Query("to_user_id") targetId: String?) =
@@ -296,15 +307,24 @@ open class ApiRepository() {
         http().dynamicsDelete(dynamics_id)
 
     suspend fun dynamicsMyList(@Query("page") currentPage: Int) = http().dynamicsMyList(currentPage)
-
+    suspend fun dynamicsPublish(
+        @Query("content") dynamics_content: String,
+        @Field("photo_list[]") dynamics_photo: MutableList<String>,
+        @Query("publish_city") city: String?
+    ) = http().dynamicsPublish(dynamics_content, dynamics_photo, city)
 
     suspend fun dynamicsVideoPublish(
         @Query("content") content: String?,
         @Query("cover_url") cover_url: String?,
-        @Query("video_url") video_url: String?
-    ) = http().dynamicsVideoPublish(content, cover_url, video_url)
+        @Query("video_url") video_url: String?,
+        @Query("publish_city") city: String?
+
+    ) = http().dynamicsVideoPublish(content, cover_url, video_url,city)
 
     suspend fun canPublish() = http().canPublish()
+
+    suspend fun dynamicDetail(dynamicId: String) = http().dynamicDetail(dynamicId)
+
 
     //-----------------------------------------dating---------------------------------------------//
     suspend fun datingList(
@@ -347,7 +367,7 @@ open class ApiRepository() {
         dating_photo
     )
 
-    suspend fun datingEnrolls(@Query("dating_id") dating_id: String) = http().datingEnrolls(dating_id)
+    suspend fun datingEnrolls(dating_id: String) = http().datingEnrolls(dating_id)
 
     suspend fun datingAudit(
         @Query("dating_id") dating_id: Int,
@@ -366,7 +386,4 @@ open class ApiRepository() {
     suspend fun datingCheckCanPublish() = http().datingCheckCanPublish()
 
     suspend fun datingStatistics() = http().datingStatistics()
-
-
-
 }

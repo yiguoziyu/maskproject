@@ -4,7 +4,6 @@ import com.ljj.lannotation.Persistence;
 
 import java.io.Serializable;
 
-
 @Persistence
 public class InviteWithdrawBean implements Serializable {
     private Long balance;
@@ -51,8 +50,8 @@ public class InviteWithdrawBean implements Serializable {
         return withdraw_info;
     }
 
-    public void setWithdraw_info(WithdrawInfo withdraw_inf) {
-        this.withdraw_info = withdraw_inf;
+    public void setWithdraw_info(WithdrawInfo withdraw_info) {
+        this.withdraw_info = withdraw_info;
     }
 
     public Long getWithdraw_total() {

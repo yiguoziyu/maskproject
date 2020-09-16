@@ -42,6 +42,7 @@ public class PayTypeBean {
         private int pay_type;
         private String name;
         private String icon;
+
         public int getPay_type() {
             return pay_type;
         }
@@ -85,6 +86,28 @@ public class PayTypeBean {
         private int effective_days;
         private String recg_description;
         private String expected_expiration_time;
+        private boolean isSelect;
+        private List<BannerVipDialogBean> rights_and_interests;
+
+        public List<BannerVipDialogBean> getRights_and_interests() {
+            if (rights_and_interests == null) {
+                return new ArrayList<>();
+            }
+            return rights_and_interests;
+        }
+
+        public void setRights_and_interests(List<BannerVipDialogBean> rights_and_interests) {
+            this.rights_and_interests = rights_and_interests;
+        }
+
+        public boolean isSelect() {
+            return isSelect;
+        }
+
+        public void setSelect(boolean select) {
+            isSelect = select;
+        }
+
         /**
          * product_id : 5
          * product_name : 认证费用
@@ -100,10 +123,6 @@ public class PayTypeBean {
 //        private int effective_days;
 //        private String product_description;
 //        private String expected_expiration_time;
-
-
-
-
         public int getProduct_id() {
             return recg_id;
         }
@@ -121,7 +140,7 @@ public class PayTypeBean {
         }
 
         public String getPrice() {
-            return value == null ? "" : value;
+            return value == null ? "0" : value;
         }
 
         public void setPrice(String price) {
@@ -162,7 +181,7 @@ public class PayTypeBean {
         }
 
         public String getValue() {
-            return value;
+            return value == null ? "0" : value;
         }
 
         public void setValue(String value) {
@@ -170,7 +189,7 @@ public class PayTypeBean {
         }
 
         public String getDefault_value() {
-            return default_value;
+            return default_value == null ? "0" : default_value;
         }
 
         public void setDefault_value(String default_value) {

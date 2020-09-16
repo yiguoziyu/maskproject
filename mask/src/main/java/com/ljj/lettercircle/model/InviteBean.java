@@ -1,9 +1,13 @@
 package com.ljj.lettercircle.model;
 
+import com.ljj.lannotation.Persistence;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InviteBean {
+@Persistence
+public class InviteBean implements Serializable {
     private List<String> banner_list;
     private String invite_num;
     private String invite_amount;
@@ -68,7 +72,7 @@ public class InviteBean {
         this.last_hundred_income = last_hundred_income;
     }
 
-    public class InviteRankingBean{
+    public class InviteRankingBean implements Serializable{
         private String amount;
         private String user_id;
         private String nick_name;
@@ -106,7 +110,7 @@ public class InviteBean {
             this.avatar = avatar;
         }
     }
-    public class InviteBroasrBean{
+    public class InviteBroasrBean implements Serializable{
         private String user_id;
         private String nick_name;
         private String amount;

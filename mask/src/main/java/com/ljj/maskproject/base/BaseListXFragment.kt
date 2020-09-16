@@ -1,6 +1,7 @@
 package com.ljj.maskproject.base
 
 import androidx.recyclerview.widget.RecyclerView
+import com.ljj.commonlib.jectpack.paging.BaseListInterface
 import com.ljj.commonlib.jectpack.paging.PAGE_FIRST
 import com.ljj.commonlib.ui.recyclerview.adapter.BaseListAdpater
 import com.ljj.maskproject.R
@@ -10,11 +11,14 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener
 import kotlinx.android.synthetic.main.base_listx.*
 
-abstract class BaseListXFragment : BaseXFragment() {
+abstract class BaseListXFragment : BaseXFragment(), BaseListInterface {
     var mPage = PAGE_FIRST
     private var rvRefreshlayout: SmartRefreshLayout? = null
     private var rvStatelayout: StateLayout? = null
-
+    //是否支持刷新
+    private var mEnableRefresh = true
+    //是否支持加载更多
+    private var mEnableLoad = true
     open fun bindRefreshLayout(): SmartRefreshLayout? = rv_refreshlayout
     open fun bindStateLayout(): StateLayout? = rv_statelayout
 
@@ -39,26 +43,9 @@ abstract class BaseListXFragment : BaseXFragment() {
     }
 
     /**
-     * 处理拉黑回调
-     */
-    open fun handlerViewModel(addFunc: () -> Unit = {}, removeFunc: () -> Unit = {}) {
-//        mConfigViewModel.apply {
-//            addToBlacklist.observe(viewLifecycleOwner, Observer {
-//                ToastHelper.showToast("拉黑成功")
-//                addFunc()
-//            })
-//            removeFromBlacklist.observe(viewLifecycleOwner, Observer {
-//                ToastHelper.showToast("取消成功")
-//                removeFunc()
-//            })
-//
-//        }.handlerAll(requireActivity())
-    }
-
-    /**
      * 新增数据
      */
-    fun <T> addData(adpater: BaseListAdpater<T>, index: Int, data: T) {
+    override fun <T> addData(adpater: BaseListAdpater<T>, index: Int, data: T) {
         adpater.addData(index, data)
         checkDataEmpty(adpater.dataList)
     }
@@ -66,7 +53,7 @@ abstract class BaseListXFragment : BaseXFragment() {
     /**
      * 新增数据
      */
-    fun <T> addData(adpater: BaseListAdpater<T>, data: T) {
+    override fun <T> addData(adpater: BaseListAdpater<T>, data: T) {
         adpater.addData(data)
         checkDataEmpty(adpater.dataList)
     }
@@ -74,7 +61,7 @@ abstract class BaseListXFragment : BaseXFragment() {
     /**
      * 删除数据
      */
-    fun <T> removeData(adpater: BaseListAdpater<T>, data: T) {
+    override fun <T> removeData(adpater: BaseListAdpater<T>, data: T) {
         val index = adpater.dataList.indexOf(data)
         if (index >= 0) {
             adpater.removeData(data)
@@ -86,7 +73,7 @@ abstract class BaseListXFragment : BaseXFragment() {
     /**
      * 根据集合设置View
      */
-    fun <T> checkDataEmpty(dataList: MutableList<T>) {
+    override fun <T> checkDataEmpty(dataList: MutableList<T>) {
         if (dataList.size == 0) {
             rvStatelayout?.showEmptyView()
         } else {
@@ -97,7 +84,7 @@ abstract class BaseListXFragment : BaseXFragment() {
     /**
      * 刷新所有数据
      */
-    fun <T> setDataNotify(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
+    override fun <T> setDataNotify(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
         checkDataEmpty(dataList)
         adpater.setData(dataList)
     }
@@ -105,7 +92,7 @@ abstract class BaseListXFragment : BaseXFragment() {
     /**
      * 设置数据
      */
-    fun <T> setData(adpater: BaseListAdpater<T>, dataList: MutableList<T>, rv: RecyclerView? = null) {
+    override fun <T> setData(adpater: BaseListAdpater<T>, dataList: MutableList<T>, rv: RecyclerView?) {
         if (mPage == PAGE_FIRST) {
             if (dataList.size == 0) {
                 rvStatelayout?.showEmptyView()
@@ -126,10 +113,11 @@ abstract class BaseListXFragment : BaseXFragment() {
     /**
      * 设置嵌套的数据
      */
-    fun <T> setMultipleData(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
+    override  fun <T> setMultipleData(adpater: BaseListAdpater<T>, dataList: MutableList<T>) {
         if (mPage == PAGE_FIRST) {
             if (dataList.size == 0) {
                 rvStatelayout?.showEmptyView()
+                rvRefreshlayout?.finishLoadMoreWithNoMoreData()
             } else {
                 adpater.setMultipleData(dataList)
                 rvStatelayout?.showContentView()
@@ -138,8 +126,10 @@ abstract class BaseListXFragment : BaseXFragment() {
         } else {
             if (dataList.size != 0) {
                 adpater.addData(dataList)
+                rvRefreshlayout?.finishLoadMore()
+            } else {
+                rvRefreshlayout?.finishLoadMoreWithNoMoreData()
             }
-            rvRefreshlayout?.finishLoadMore()
         }
     }
 
@@ -148,17 +138,25 @@ abstract class BaseListXFragment : BaseXFragment() {
         onLoadData()
     }
 
-    fun onRefresh() {
+    override fun onRefresh(enableRefresh: Boolean, enableLoad: Boolean) {
         mPage = PAGE_FIRST
+        mEnableRefresh = enableRefresh
+        mEnableLoad = enableLoad
         rvRefreshlayout?.scrollTo(0, 0)
+        if (mEnableLoad) {
+            rvRefreshlayout?.setEnableLoadMore(true)
+        }
+        if (mEnableRefresh) {
+            rvRefreshlayout?.setEnableRefresh(true)
+        }
         onLoadData()
     }
 
-    fun onRefreshWithAnimator() {
+    override  fun onRefreshWithAnimator() {
         rvRefreshlayout?.autoRefresh()
     }
 
-    open fun onLoadData() {
+    override fun onLoadData() {
 
     }
 

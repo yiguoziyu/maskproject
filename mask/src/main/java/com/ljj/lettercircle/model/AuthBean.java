@@ -1,5 +1,6 @@
 package com.ljj.lettercircle.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
