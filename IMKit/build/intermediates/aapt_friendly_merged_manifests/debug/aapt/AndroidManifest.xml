@@ -5,8 +5,8 @@
     android:versionName="2.10.0 release" >
 
     <uses-sdk
-        android:minSdkVersion="21"
-        android:targetSdkVersion="29" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23" />
 
     <!-- 访问相册，访问文件系统等 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

@@ -2,7 +2,6 @@ package com.ljj.maskproject.base
 
 import com.ljj.commonlib.jectpack.paging.PAGE_FIRST
 import com.ljj.commonlib.ui.recyclerview.adapter.BaseListAdpater
-import com.ljj.lannotation.PageConfig
 import com.ljj.maskproject.R
 import com.ljj.maskproject.view.StateLayout
 import com.scwang.smartrefresh.layout.SmartRefreshLayout

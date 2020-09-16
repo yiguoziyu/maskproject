@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import com.ljj.commonlib.base.BaseNetActivity
 import com.ljj.maskproject.helper.ToastHelper
+
 import io.rong.imkit.RongIM
 import io.rong.imkit.manager.IUnReadMessageObserver
 import io.rong.imlib.RongIMClient
@@ -79,3 +80,4 @@ abstract class BaseIMXActivity : BaseNetActivity(), RongIMClient.ConnectionStatu
 
 
 }
+

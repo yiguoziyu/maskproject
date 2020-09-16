@@ -42,7 +42,7 @@ dependencies {
 
 //    api 'com.github.yiguoziyu:maskproject:1.0.4'
 //    kapt 'com.github.yiguoziyu:maskproject:1.0.4'
-//    implementation project(":mask")
-    api 'com.github.yiguoziyu:commlibs:2.6'
-    kapt 'com.github.yiguoziyu:commlibs:2.6'
+    implementation project(":mask")
+//    api 'com.github.yiguoziyu:commlibs:2.6'
+//    kapt 'com.github.yiguoziyu:commlibs:2.6'
 }
