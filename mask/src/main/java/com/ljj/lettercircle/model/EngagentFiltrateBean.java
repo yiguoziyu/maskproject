@@ -1,15 +1,14 @@
 package com.ljj.lettercircle.model;
 
+import com.ljj.commonlib.base.BaseApplication;
+import com.ljj.commonlib.kit.cache.ACache;
 
-
-import com.ljj.lannotation.Persistence;
 
 import java.io.Serializable;
 
 /**
  * Created by 一锅子鱼 on 2018/11/30.
  */
-@Persistence
 public class EngagentFiltrateBean implements Serializable {
 
     private String city;
@@ -18,6 +17,37 @@ public class EngagentFiltrateBean implements Serializable {
     private int cityPostion;
     private int provincePostion;
 
+    public static String cacheKey = EngagentFiltrateBean.class.getSimpleName();
+    private static EngagentFiltrateBean ourInstance;
+
+    public static EngagentFiltrateBean getInstance() {
+        if (IsNull()) {
+            ourInstance = new EngagentFiltrateBean().getFromCache();
+            if (IsNull()) {
+                ourInstance = new EngagentFiltrateBean();
+            }
+        }
+        return ourInstance;
+    }
+
+    EngagentFiltrateBean getFromCache() {
+        ourInstance = (EngagentFiltrateBean) ACache.get(BaseApplication.application).getAsObject(cacheKey);
+        return ourInstance;
+    }
+
+    public static boolean IsNull() {
+        return ourInstance == null;
+    }
+
+    public static void writeToCache(EngagentFiltrateBean obj) {
+        ourInstance = obj;
+        ACache.get(BaseApplication.application).put(cacheKey, obj);
+    }
+
+    public static void cleanCache() {
+        ACache.get(BaseApplication.application).remove(cacheKey);
+        ourInstance = null;
+    }
 
     public String getCity() {
         return city == null ? "不限地区" : city;

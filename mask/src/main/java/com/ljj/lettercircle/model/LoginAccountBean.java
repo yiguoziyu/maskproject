@@ -1,21 +1,70 @@
 package com.ljj.lettercircle.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.ljj.lannotation.Persistence;
+import com.ljj.commonlib.base.BaseApplication;
+import com.ljj.commonlib.kit.cache.ACache;
 
 import java.io.Serializable;
 
 /**
  * Created by 一锅子鱼 on 2018/11/5.
  */
-@Persistence
 public class LoginAccountBean implements Serializable {
 
+
+    public static String cacheKey = LoginAccountBean.class.getSimpleName();
+    private static LoginAccountBean ourInstance;
+    /**
+     * photo_list_self : []
+     * avatar_check_status : 0
+     * province :
+     * annual_income :
+     * height : 0
+     * profession : null
+     * wechat :
+     * digital_code :
+     * is_complete : 0
+     * interest_label : null
+     * login_time : 1547456024
+     * already_touch_user_list : null
+     * register_time : 1547444858
+     * account_block_remark : null
+     * is_pzp : 0
+     * verf_step : 0
+     * data_integrity : 35
+     * action :
+     */
 
     private String province;
     private String annual_income;
     private int height;
     private Object profession;
+    public static LoginAccountBean getInstance() {
+        if (IsNull()) {
+            ourInstance = new LoginAccountBean().getFromCache();
+            if (IsNull()) {
+                ourInstance = new LoginAccountBean();
+            }
+        }
+        return ourInstance;
+    }
+    public static LoginAccountBean getFromCache() {
+        ourInstance = (LoginAccountBean) ACache.get(BaseApplication.application).getAsObject(cacheKey);
+        return ourInstance;
+    }
+    public static boolean IsNull() {
+        return ourInstance == null;
+    }
+
+    public static void writeToCache(LoginAccountBean obj) {
+        ourInstance = obj;
+        ACache.get(BaseApplication.application).put(cacheKey, obj);
+    }
+
+    public static void cleanCache() {
+        ACache.get(BaseApplication.application).remove(cacheKey);
+        ourInstance = null;
+    }
 
     private int user_id;
     private String nick_name;
@@ -703,6 +752,21 @@ public class LoginAccountBean implements Serializable {
         this.token = token;
     }
 
+    public static String getCacheKey() {
+        return cacheKey == null ? "" : cacheKey;
+    }
+
+    public static void setCacheKey(String cacheKey) {
+        LoginAccountBean.cacheKey = cacheKey;
+    }
+
+    public static LoginAccountBean getOurInstance() {
+        return ourInstance;
+    }
+
+    public static void setOurInstance(LoginAccountBean ourInstance) {
+        LoginAccountBean.ourInstance = ourInstance;
+    }
 
     public String getProvince() {
         return province == null ? "" : province;

@@ -1,13 +1,15 @@
 package com.ljj.maskproject.viewmodels.request
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
 import com.ljj.lettercircle.model.SimpleUserBean
+
+import com.ljj.lettercircle.model.*
 import com.ljj.maskproject.ex.launch
 import com.ljj.maskproject.ex.launchWithLoading
 import com.ljj.maskproject.ex.launchWithStateView
 import com.ljj.maskproject.http.manager.ApiRepository
-import com.ljj.lettercircle.model.*
 import com.ljj.maskproject.viewmodels.global.CommonGlobalViewModel
 
 class CommonRequestViewModel : BaseViewModel() {

@@ -1,6 +1,7 @@
 package com.ljj.maskproject.http.config
 
 import android.util.Log
+import com.ljj.commonlib.ex.isEmptyOrNull
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
 import com.ljj.commonlib.base.BaseApplication
@@ -8,7 +9,7 @@ import com.ljj.commonlib.net.network.NetUtil
 import com.ljj.commonlib.util.CommonUtil
 import com.ljj.lettercircle.model.GpsLocationBean
 import com.ljj.lettercircle.model.LoginAccountBean
-
+import com.ljj.maskproject.helper.SharedPreHelper
 
 
 class HeaderInterceptor {
@@ -20,7 +21,7 @@ class HeaderInterceptor {
         val loginInterceptorBuilder = LoggingInterceptor.Builder()
                 .setLevel(Level.BASIC)
                 .log(Log.VERBOSE)
-//        SharedPreHelper.getToken(App.getApp()).isEmptyOrNull { loginInterceptorBuilder.addHeader("Token", it) }
+        SharedPreHelper.getToken(BaseApplication.application).isEmptyOrNull { loginInterceptorBuilder.addHeader("Token", it) }
         if (!LoginAccountBean.getInstance().token.isNullOrEmpty()) {
             loginInterceptorBuilder.addHeader("Token", LoginAccountBean.getInstance().token)
         }

@@ -3,147 +3,107 @@ package com.ljj.maskproject.viewmodels.request
 import androidx.lifecycle.MutableLiveData
 import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
 import com.ljj.maskproject.ex.launchWithLoading
-import com.ljj.maskproject.ex.launchWithStateView
-import com.ljj.maskproject.http.manager.ApiRepository
 import com.ljj.lettercircle.model.LoginAccountBean
-import com.ljj.lettercircle.model.PersonBean
-import com.ljj.lettercircle.model.PersonDetailBean
+import com.ljj.maskproject.http.manager.ApiRepository
 
-/**
- * 登录
- */
 class LoginRequestViewModel : BaseViewModel() {
+    //手机登录
+    //微信登录
+    private val _loginLiveData = MutableLiveData<LoginAccountBean>()
+    val loginLiveData get() = _loginLiveData
 
-    private val _visitorHome by lazy { MutableLiveData<MutableList<PersonBean>>() }
-    val visitorHome get() = _visitorHome
-    private val _visitorHomePage by lazy { MutableLiveData<MutableList<PersonDetailBean>>() }
-    val visitorHomePage get() = _visitorHomePage
-    private val _visitorDynamics by lazy { MutableLiveData<Any>() }
-    val visitorDynamics get() = _visitorDynamics
-    private val _checkPhone by lazy { MutableLiveData<Any>() }
-    val checkPhone get() = _checkPhone
-    private val _sendSmsCode by lazy { MutableLiveData<Any>() }
-    val sendSmsCode get() = _sendSmsCode
-    private val _register by lazy { MutableLiveData<LoginAccountBean>() }
-    val register get() = _register
-    private val _loginByWx by lazy { MutableLiveData<LoginAccountBean>() }
-    val loginByWx get() = _loginByWx
-    private val _loginByFast by lazy { MutableLiveData<LoginAccountBean>() }
-    val loginByFast get() = _loginByFast
-    private val _loginBySmsCode by lazy { MutableLiveData<LoginAccountBean>() }
-    val loginBySmsCode get() = _loginBySmsCode
-    private val _updateUserProperty by lazy { MutableLiveData<Any>() }
-    val updateUserProperty get() = _updateUserProperty
-    private val _perfectUserInfo by lazy { MutableLiveData<LoginAccountBean>() }
-    val perfectUserInfo get() = _perfectUserInfo
-    private val _supplementaryUserInfo by lazy { MutableLiveData<Any>() }
-    val supplementaryUserInfo get() = _supplementaryUserInfo
+    private val _wxloginLiveData = MutableLiveData<LoginAccountBean>()
+    val wxloginLiveData get() = _wxloginLiveData
+    //一键登录
+    private val _loginByFastLiveData = MutableLiveData<LoginAccountBean>()
+    val loginByFastLiveData get() = _loginByFastLiveData
 
 
-    fun visitorHome(
-        sex: Int,
-        currentPage: Int
-    ) {
-        launchWithStateView({
-            ApiRepository().visitorHome(sex, currentPage)
-        }, liveData = _visitorHome)
-    }
+    private val _sendSmsCodeLiveData = MutableLiveData<Boolean>()
+    val sendSmsCodeLiveData get() = _sendSmsCodeLiveData
+    val sendSmsCodeState = MutableLiveData<Boolean>()
 
-    fun visitorHomePage(uId: String) {
-        launchWithStateView({
-            ApiRepository().visitorHomePage(uId)
-        }, liveData = _visitorHomePage)
-    }
 
-    fun visitorDynamics(
-        uId: String,
-        currentPage: Int
-    ) {
-        launchWithStateView({
-            ApiRepository().visitorDynamics(uId, currentPage)
-        }, liveData = _visitorDynamics)
-    }
+    private val _checkPhoneLiveData = MutableLiveData<Boolean>()
+    val checkPhoneLiveData get() = _checkPhoneLiveData
+
+
+
+    private val _registerLiveData = MutableLiveData<LoginAccountBean>()
+    val registerLiveData get() = _registerLiveData
+    private val _registerSexLiveData = MutableLiveData<Any>()
+    val registerSexLiveData get() = _registerSexLiveData
+    private val _registerUserDataLiveData = MutableLiveData<LoginAccountBean>()
+    val registerUserDataLiveData get() = _registerUserDataLiveData
 
     fun checkPhone(phone: String) {
         launchWithLoading({
             ApiRepository().checkPhone(phone)
-        }, liveData = _checkPhone)
+        }, {
+            _checkPhoneLiveData.value = true
+        }, onError = {
+            sendSmsCodeState.value = false
+        })
     }
 
-    fun sendSmsCode(
-        phone: String,
-        action: String
-    ) {
+    fun sendSmsCode(phone: String, action: String, ticket: String?, randStr: String?) {
         launchWithLoading({
-            ApiRepository().sendSmsCode(phone, action)
-        }, liveData = _sendSmsCode)
-    }
-
-    fun register(
-        phone: String,
-        smsCode: String,
-        platform: String,
-        password: String
-    ) {
-        launchWithLoading({
-            ApiRepository().register(phone, smsCode, platform, password)
-        }, liveData = _register)
-    }
-
-
-    fun loginByWx(
-        platform: String,
-        unionid: String,
-        openid: String,
-        access_token: String
-    ) {
-        launchWithLoading({
-            ApiRepository().loginByWx(platform, unionid, openid, access_token)
-        }, liveData = _loginByWx)
+            ApiRepository().sendSmsCode(phone, action, ticket, randStr)
+        }, {
+            _sendSmsCodeLiveData.value = true
+        }, onError = {
+            sendSmsCodeState.value = false
+        }, onSpecial = {
+        })
     }
 
     fun loginByFast(accessToken: String?) {
         launchWithLoading({
             ApiRepository().loginByFast(accessToken)
-        }, liveData = _loginByFast)
+        }, {
+            _loginByFastLiveData.value = it
+        })
     }
 
-    fun loginBySmsCode(
-        phone: String,
-        smsCode: String
-    ) {
+
+    fun loginByWx(unionid: String, openid: String, access_token: String) {
+        launchWithLoading({
+            ApiRepository().loginByWx(unionid, openid, access_token)
+        }, {
+            _wxloginLiveData.value = it
+        })
+    }
+
+    fun loginBySmsCode(phone: String, smsCode: String) {
         launchWithLoading({
             ApiRepository().loginBySmsCode(phone, smsCode)
-        }, liveData = _loginBySmsCode)
+        }, {
+            _loginLiveData.value = it
+        })
     }
 
-    fun updateUserProperty(property: String) {
+
+    fun register(phoneNumber: String, sms_code: String) {
         launchWithLoading({
-            ApiRepository().updateUserProperty(property)
-        }, liveData = _updateUserProperty)
+            ApiRepository().register(phoneNumber, sms_code)
+        }, {
+            _registerLiveData.value = it
+        })
     }
 
-    fun perfectUserInfo(
-        birthday: String?,
-        location: String?,
-        province: String?,
-        annual_income: String?,
-        type: String?
-    ) {
+    fun registerSex(mSex: Int) {
+        launchWithLoading({
+            ApiRepository().updateUserSex("$mSex")
+        }, {
+            _registerSexLiveData.value = it
+        })
+    }
+
+    fun registerUserData(birthday: String? = null, location: String? = null, province: String? = null, annual_income: String? = null, type: String? = null) {
         launchWithLoading({
             ApiRepository().perfectUserInfo(birthday, location, province, annual_income, type)
-        }, liveData = _perfectUserInfo)
+        }, {
+            _registerUserDataLiveData.value = it
+        })
     }
-
-    fun supplementaryUserInfo(
-        avatar: String,
-        nick: String?,
-        height: String?,
-        wechat: String?
-    ) {
-        launchWithLoading({
-            ApiRepository().supplementaryUserInfo(avatar, nick, height, wechat)
-        }, liveData = _supplementaryUserInfo)
-    }
-
 }

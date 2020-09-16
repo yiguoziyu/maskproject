@@ -2,10 +2,11 @@ package com.ljj.maskproject.viewmodels.request
 
 import androidx.lifecycle.MutableLiveData
 import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
+import com.ljj.maskproject.ex.launchWithLoading
 import com.ljj.maskproject.ex.launchWithStateView
-import com.ljj.maskproject.http.manager.ApiRepository
 import com.ljj.lettercircle.model.PayBean
 import com.ljj.lettercircle.model.PayTypeBean
+import com.ljj.maskproject.http.manager.ApiRepository
 
 
 /**
@@ -24,13 +25,24 @@ class PayRequesrViewModel : BaseViewModel() {
         }, liveData = _getPayType)
     }
 
-    fun recharge(
-        goodId: Int, pay_way: Int, platform: String
-    ) {
+    fun getPayTypeNew(type: String) {
         launchWithStateView({
-            ApiRepository().recharge(goodId, pay_way, platform)
-        },liveData = _recharge)
+            ApiRepository().getPayTypeNew(type)
+        }, liveData = _getPayType)
     }
 
+    fun recharge(
+            goodId: Int, pay_way: String
+    ) {
+        launchWithLoading({
+            ApiRepository().recharge(goodId, pay_way)
+        }, liveData = _recharge)
+    }
+
+    fun recgWithCoupon(recg_id: String, pyed_way: String, coupon_id: String?) {
+        launchWithLoading({
+            ApiRepository().recgWithCoupon(recg_id, pyed_way, coupon_id)
+        }, liveData = _recharge)
+    }
 
 }
