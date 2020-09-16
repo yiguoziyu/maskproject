@@ -54,8 +54,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
-    api 'com.github.yiguoziyu:commlibs:2.8'
-    kapt 'com.github.yiguoziyu:commlibs:2.8'
+    api ('com.github.yiguoziyu:commlibs:2.8'){
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    kapt ('com.github.yiguoziyu:commlibs:2.8'){
+        exclude group: 'com.google.guava', module: 'guava'
+    }
     //--------------um----------------------------//
     // 下面各SDK根据宿主App是否使用相关业务按需引入。
     // OAID目前为目前国内市场主流的Android Q设备标识，可根据需要选择。

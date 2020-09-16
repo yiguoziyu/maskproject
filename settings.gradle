@@ -1,3 +1,6 @@
+include ':lannotation'
+include ':lcompiler'
+include ':commonlib'
 include ':mask'
 include ':app'
 include ':IMKit'
