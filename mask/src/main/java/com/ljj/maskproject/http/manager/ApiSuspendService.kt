@@ -15,7 +15,7 @@ interface ApiSuspendService {
 
     /***自动发放优惠券***/
     @GET(HttpApi.autoGift)
-    suspend fun autoGift(): BaseResponse<Any>
+    suspend fun autoGift(): BaseResponse<CouponAutoGifBean>
 
     /***获取我所有的优惠券***/
     @GET(HttpApi.getCouponList)
