@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ljj.commonlib.jectpack.paging.BaseListInterface
 import com.ljj.commonlib.jectpack.paging.PAGE_FIRST
 import com.ljj.commonlib.ui.recyclerview.adapter.BaseListAdpater
+import com.ljj.lannotation.PageConfig
 import com.ljj.maskproject.R
 import com.ljj.viewlib.statelayout.StateLayout
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -23,9 +24,7 @@ abstract class BaseListXFragment : BaseXFragment(), BaseListInterface {
     open fun bindStateLayout(): StateLayout? = rv_statelayout
 
 
-    override fun getLayoutId(): Int {
-        return R.layout.base_listx
-    }
+
     override fun initData() {
         rvRefreshlayout = bindRefreshLayout()
         rvStatelayout = bindStateLayout()

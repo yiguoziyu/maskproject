@@ -316,19 +316,30 @@ fun BaseAndroidViewModel.handleToast(@NonNull activity: FragmentActivity) {
     })
 }
 
-fun BaseAndroidViewModel.handleView(@NonNull activity: FragmentActivity, statelayout: StateLayout) {
+fun BaseAndroidViewModel.handleView(
+    @NonNull activity: BaseViewActivity,
+    statelayout: StateLayout?,
+    refresh: SmartRefreshLayout? = null
+) {
     return this.viewState.observe(activity, Observer {
         when (it) {
-            is ViewState.ViewContent -> statelayout.showContentView()
-            is ViewState.ViewEmpty -> statelayout.showEmptyView()
-            is ViewState.ViewFail -> statelayout.showErrorView()
-            is ViewState.ViewProgress -> statelayout.showProgressView()
+            is ViewState.LoadingShow -> activity.showLoadDialog()
+            is ViewState.LoadingDismiss -> activity.dismissLoadDialog()
+            is ViewState.ViewContent -> statelayout?.showContentView()
+            is ViewState.ViewEmpty -> statelayout?.showEmptyView()
+            is ViewState.ViewFail -> {
+                statelayout?.showErrorView()
+                refresh?.finishRefresh()
+                refresh?.finishLoadMore()
+            }
+            is ViewState.ViewProgress -> statelayout?.showProgressView()
         }
     })
 }
 
+
 fun BaseAndroidViewModel.handleRefresh(
-    @NonNull activity: BaseViewActivity,
+    @NonNull activity: FragmentActivity,
     refresh: SmartRefreshLayout
 ) {
     return this.refreshState.observe(activity, Observer {
@@ -341,7 +352,7 @@ fun BaseAndroidViewModel.handleRefresh(
 }
 
 fun BaseAndroidViewModel.handlerResponse(
-    @NonNull activity: BaseViewActivity,
+    @NonNull activity: FragmentActivity,
     onSuccess: (response: BaseResponse<out Any?>) -> Unit = {},
     onSpecial: (response: BaseResponse<out Any?>) -> Unit = {},
     onFail: (response: BaseResponse<out Any?>) -> Unit = {}
@@ -361,17 +372,17 @@ fun BaseAndroidViewModel.handlerResponse(
     })
 }
 
+
 fun BaseAndroidViewModel.handlerAll(
-    @NonNull activity: BaseViewActivity,
-    statelayout: StateLayout?,
-    refresh: SmartRefreshLayout?
+    @NonNull activity: FragmentActivity,
+    onSuccess: (response: BaseResponse<out Any?>) -> Unit = {},
+    onSpecial: (response: BaseResponse<out Any?>) -> Unit = {},
+    onFail: (response: BaseResponse<out Any?>) -> Unit = {},
+    statelayout: StateLayout? = null,
+    refresh: SmartRefreshLayout? = null
 ) {
-    statelayout?.let {
-        handleView(activity, statelayout)
+    if (activity is BaseViewActivity) {
+        handleView(activity, statelayout, refresh)
     }
-    refresh?.let {
-        handleRefresh(activity, it)
-    }
-    handlerResponse(activity)
-    handleToast(activity)
+    handlerResponse(activity, onSuccess, onSpecial, onFail)
 }

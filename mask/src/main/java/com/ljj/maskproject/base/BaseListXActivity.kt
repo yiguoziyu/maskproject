@@ -4,13 +4,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ljj.commonlib.jectpack.paging.BaseListInterface
 import com.ljj.commonlib.jectpack.paging.PAGE_FIRST
 import com.ljj.commonlib.ui.recyclerview.adapter.BaseListAdpater
+import com.ljj.lannotation.PageConfig
 import com.ljj.maskproject.R
 import com.ljj.viewlib.statelayout.StateLayout
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener
 import kotlinx.android.synthetic.main.base_listx.*
-
 abstract class BaseListXActivity : BaseViewActivity(), BaseListInterface {
     companion object {
         private const val TAG = "BaseListXActivity"
@@ -26,9 +26,6 @@ abstract class BaseListXActivity : BaseViewActivity(), BaseListInterface {
     //是否支持加载更多
     private var mEnableLoad = true
 
-    override fun getLayoutId(): Int {
-        return R.layout.base_listx
-    }
 
     open fun bindRefreshLayout(): SmartRefreshLayout? = rv_refreshlayout
     open fun bindStateLayout(): StateLayout? = rv_statelayout

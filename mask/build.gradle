@@ -45,6 +45,11 @@ android {
             dirs 'libs'
         }
     }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res']
+        }
+    }
 
 }
 
