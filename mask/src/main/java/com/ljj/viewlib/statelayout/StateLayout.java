@@ -1,4 +1,4 @@
-package com.ljj.maskproject.view;
+package com.ljj.viewlib.statelayout;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

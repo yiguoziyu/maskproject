@@ -6,7 +6,6 @@ import com.ljj.maskproject.base.BaseViewActivity
 @PageConfig(layoutId = R.layout.activity_main)
 class MainActivity : BaseViewActivity() {
     override fun initData() {
-
     }
 
 }

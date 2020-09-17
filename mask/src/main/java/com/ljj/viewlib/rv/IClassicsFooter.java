@@ -1,4 +1,4 @@
-package com.ljj.maskproject.view;
+package com.ljj.viewlib.rv;
 
 import android.content.Context;
 import android.content.res.TypedArray;

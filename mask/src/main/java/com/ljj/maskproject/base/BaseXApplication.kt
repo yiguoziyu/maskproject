@@ -6,10 +6,10 @@ import com.ljj.commonlib.model.BaseResponse
 
 abstract class BaseXApplication: BaseApplication() {
     //非100值统一处理
-    fun <T> handleSpecial(response: BaseResponse<T>, activity: FragmentActivity) {
+    open fun <T> handleSpecial(response: BaseResponse<T>, activity: FragmentActivity) {
 
     }
-    fun loginOut(activity: FragmentActivity){
+    open fun loginOut(activity: FragmentActivity){
 
     }
 }

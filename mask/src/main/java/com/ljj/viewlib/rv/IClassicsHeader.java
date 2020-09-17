@@ -1,4 +1,4 @@
-package com.ljj.maskproject.view;
+package com.ljj.viewlib.rv;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

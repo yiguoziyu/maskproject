@@ -5,7 +5,7 @@ import com.ljj.commonlib.jectpack.paging.BaseListInterface
 import com.ljj.commonlib.jectpack.paging.PAGE_FIRST
 import com.ljj.commonlib.ui.recyclerview.adapter.BaseListAdpater
 import com.ljj.maskproject.R
-import com.ljj.maskproject.view.StateLayout
+import com.ljj.viewlib.statelayout.StateLayout
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener

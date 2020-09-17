@@ -14,12 +14,12 @@
         android:layout_height="match_parent"
         app:srlEnablePreviewInEditMode="false">
 
-        <com.ljj.maskproject.view.IClassicsHeader
+        <com.ljj.viewlib.rv.IClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srlAccentColor="@color/grayDc" />
 
-        <com.ljj.maskproject.view.StateLayout
+        <com.ljj.viewlib.statelayout.StateLayout
             android:id="@+id/rv_statelayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,9 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </com.ljj.maskproject.view.StateLayout>
+        </com.ljj.viewlib.statelayout.StateLayout>
 
-        <com.ljj.maskproject.view.IClassicsFooter
+        <com.ljj.viewlib.rv.IClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_srlSpinnerStyle="FixedBehind"

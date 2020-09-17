@@ -18,7 +18,7 @@ import com.ljj.maskproject.base.BaseViewActivity
 import com.ljj.maskproject.base.BaseXApplication
 import com.ljj.maskproject.helper.ToastHelper
 import com.ljj.maskproject.http.config.IGsonException
-import com.ljj.maskproject.view.StateLayout
+import com.ljj.viewlib.statelayout.StateLayout
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
