@@ -1,9 +1,10 @@
 package com.ljj.projectmask
 
 import com.ljj.lannotation.PageConfig
-import com.ljj.maskproject.base.BaseViewXActivity
+import com.ljj.maskproject.base.BaseViewActivity
+
 @PageConfig(layoutId = R.layout.activity_main)
-class MainActivity : BaseViewXActivity() {
+class MainActivity : BaseViewActivity() {
     override fun initData() {
 
     }

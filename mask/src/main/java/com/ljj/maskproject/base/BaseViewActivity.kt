@@ -8,20 +8,12 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.ljj.commonlib.util.StatusBarUtil
 import com.ljj.lannotation.PageConfig
+
 import com.ljj.maskproject.R
-//import com.ljj.lettercircel.viewmodels.persistences.FiltrateBeanPersistenceViewModel
-//import com.ljj.lettercircle.R
-//import com.ljj.lettercircle.helper.PageHelper
-//import com.ljj.lettercircle.helper.handlerAll
-//import com.ljj.lettercircle.persistence.helper.Injection
 import com.ljj.maskproject.dialog.LoadDialog
-//import com.ljj.lettercircle.ui.viewmodels.global.AppGlobalViewModel
-//import com.ljj.maskproject.viewmodels.persistence.AccountPersistenceViewModel
-//import com.ljj.lettercircle.ui.viewmodels.persistence.LoginBeanPersistenceViewModel
-//import com.ljj.maskproject.viewmodels.request.ConfigViewModel
 import com.umeng.analytics.MobclickAgent
 
-abstract class BaseViewXActivity : BaseIMXActivity() {
+abstract class BaseViewActivity : BaseIMActivity() {
     private var mLoadDialog: LoadDialog? = null
     private val rightTvId = R.id.toolbar_right_tv
     private val titleId = R.id.toolbar_title
@@ -30,12 +22,6 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
     private val leftImgId = R.id.toolbar_back
 
     private var pageConfig: PageConfig? = null
-//    val mFiltrateBeanPersistenceViewModel by viewModels<FiltrateBeanPersistenceViewModel>()
-//    val mAccountPersistenceViewModel by viewModels<AccountPersistenceViewModel> { Injection.provideViewModelFactory(this) }
-//    val mLoginBeanPersistenceViewModel by viewModels<LoginBeanPersistenceViewModel> { Injection.provideLoginViewModelFactory(this) }
-//    val mConfigViewModel by viewModels<ConfigViewModel>()
-    private var mUserId = ""
-    private var mUserName = ""
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         initSystemBarTinit()
@@ -50,39 +36,8 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
 
     }
 
-    fun openPersonDetailPage(userId: String?) {
-//        userId?.let {
-//            mUserId = it
-//            mConfigViewModel.checkCanView(it)
-//        }
 
-    }
-
-
-    private fun initBaseViewModel() {
-//        mConfigViewModel.apply {
-//            checkCanViewLiveData.observe(this@BaseViewXActivity, Observer {
-//                PageHelper.openPersonDetailPage(this@BaseViewXActivity, it)
-//            })
-//
-//            logOffLiveData.observe(this@BaseViewXActivity, Observer {
-//                PageHelper.loginOffReady()
-//            })
-//        }.handlerAll(this)
-//        AppGlobalViewModel.apply {
-//            getLogOutLiveData().observe(this@BaseViewXActivity, Observer {
-//                mAccountPersistenceViewModel.deleteAllAccounts()
-//                mFiltrateBeanPersistenceViewModel.remove()
-//                PageHelper.loginOut(this@BaseViewXActivity)
-//            })
-//            getLogOffLiveData().observe(this@BaseViewXActivity, Observer {
-//                mLoginBeanPersistenceViewModel.deleteAllLoginBeans()
-//                mFiltrateBeanPersistenceViewModel.remove()
-//                PageHelper.loginOff(this@BaseViewXActivity)
-//            })
-//
-//        }
-
+    open fun initBaseViewModel() {
     }
 
     override fun onResume() {
@@ -113,18 +68,18 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
         mLoadDialog?.dismissDialog()
     }
 
-    open fun initEmptyTitle(): BaseViewXActivity {
+    open fun initEmptyTitle(): BaseViewActivity {
         initToolbar()
         return this
     }
 
-    open fun initSimpleTitle(mTitle: String? = null): BaseViewXActivity {
+    open fun initSimpleTitle(mTitle: String? = null): BaseViewActivity {
         initToolbar().initCenterTitle { mTitle?.let { text = it } }
         return this
     }
 
     open fun initTitle(mTitle: String? = null,
-                       isFirstInit: Boolean? = null): BaseViewXActivity {
+                       isFirstInit: Boolean? = null): BaseViewActivity {
         initToolbar(isFirstInit = isFirstInit)
                 .initLeftBack { setOnClickListener { finish() } }
                 .initCenterTitle { mTitle?.let { text = it } }
@@ -138,13 +93,13 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
     }
 
     /***设置中心Title***/
-    open fun initCenterTitle(func: TextView.() -> Unit): BaseViewXActivity {
+    open fun initCenterTitle(func: TextView.() -> Unit): BaseViewActivity {
         findViewById<TextView>(titleId).func()
         return this
     }
 
     /***设置BaseToolbar***/
-    open fun initToolbar(isFirstInit: Boolean? = null): BaseViewXActivity {
+    open fun initToolbar(isFirstInit: Boolean? = null): BaseViewActivity {
         if (isFirstInit == null) {
             initToolbar {
                 title = ""
@@ -156,7 +111,7 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
     }
 
     /***设置Toolbar***/
-    open fun initToolbar(func: Toolbar.() -> Unit): BaseViewXActivity {
+    open fun initToolbar(func: Toolbar.() -> Unit): BaseViewActivity {
         val toolBar = findViewById<Toolbar>(toolbarId)
         toolBar.func()
         initToolBarStatusBar(toolBar)
@@ -164,7 +119,7 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
     }
 
     /***设置右侧Text按钮***/
-    open fun initRightTvBack(rightTvFunc: TextView.() -> Unit): BaseViewXActivity {
+    open fun initRightTvBack(rightTvFunc: TextView.() -> Unit): BaseViewActivity {
         val tv = findViewById<TextView>(rightTvId)
         tv.visibility = View.VISIBLE
         tv.rightTvFunc()
@@ -173,7 +128,7 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
     }
 
     /***设置右侧Image按钮***/
-    open fun initRightImgBack(rightImgFunc: ImageView.() -> Unit): BaseViewXActivity {
+    open fun initRightImgBack(rightImgFunc: ImageView.() -> Unit): BaseViewActivity {
         val img = findViewById<ImageView>(rightImgId)
         img.visibility = View.VISIBLE
         img.rightImgFunc()
@@ -182,7 +137,7 @@ abstract class BaseViewXActivity : BaseIMXActivity() {
     }
 
     /***设置左侧Image按钮***/
-    open fun initLeftBack(leftImgFunc: ImageView.() -> Unit): BaseViewXActivity {
+    open fun initLeftBack(leftImgFunc: ImageView.() -> Unit): BaseViewActivity {
         findViewById<ImageView>(leftImgId).leftImgFunc()
         return this
     }

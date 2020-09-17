@@ -11,7 +11,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener
 import kotlinx.android.synthetic.main.base_listx.*
 
-abstract class BaseListXActivity : BaseViewXActivity(), BaseListInterface {
+abstract class BaseListXActivity : BaseViewActivity(), BaseListInterface {
     companion object {
         private const val TAG = "BaseListXActivity"
     }

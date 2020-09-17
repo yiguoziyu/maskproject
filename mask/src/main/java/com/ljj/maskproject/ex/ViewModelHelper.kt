@@ -14,7 +14,7 @@ import com.ljj.commonlib.jectpack.viewmodel.BaseAndroidViewModel
 import com.ljj.commonlib.jectpack.viewmodel.BaseViewModel
 import com.ljj.commonlib.model.BaseResponse
 import com.ljj.commonlib.model.createErrorResponse
-import com.ljj.maskproject.base.BaseViewXActivity
+import com.ljj.maskproject.base.BaseViewActivity
 import com.ljj.maskproject.base.BaseXApplication
 import com.ljj.maskproject.helper.ToastHelper
 import com.ljj.maskproject.http.config.IGsonException
@@ -242,7 +242,7 @@ fun <T> handleHttpResult(
 
 
 fun BaseViewModel.handleView(
-    @NonNull activity: BaseViewXActivity,
+    @NonNull activity: BaseViewActivity,
     statelayout: StateLayout?,
     refresh: SmartRefreshLayout? = null
 ) {
@@ -303,7 +303,7 @@ fun BaseViewModel.handlerAll(
     statelayout: StateLayout? = null,
     refresh: SmartRefreshLayout? = null
 ) {
-    if (activity is BaseViewXActivity) {
+    if (activity is BaseViewActivity) {
         handleView(activity, statelayout, refresh)
     }
     handlerResponse(activity, onSuccess, onSpecial, onFail)
@@ -328,7 +328,7 @@ fun BaseAndroidViewModel.handleView(@NonNull activity: FragmentActivity, statela
 }
 
 fun BaseAndroidViewModel.handleRefresh(
-    @NonNull activity: BaseViewXActivity,
+    @NonNull activity: BaseViewActivity,
     refresh: SmartRefreshLayout
 ) {
     return this.refreshState.observe(activity, Observer {
@@ -341,7 +341,7 @@ fun BaseAndroidViewModel.handleRefresh(
 }
 
 fun BaseAndroidViewModel.handlerResponse(
-    @NonNull activity: BaseViewXActivity,
+    @NonNull activity: BaseViewActivity,
     onSuccess: (response: BaseResponse<out Any?>) -> Unit = {},
     onSpecial: (response: BaseResponse<out Any?>) -> Unit = {},
     onFail: (response: BaseResponse<out Any?>) -> Unit = {}
@@ -362,7 +362,7 @@ fun BaseAndroidViewModel.handlerResponse(
 }
 
 fun BaseAndroidViewModel.handlerAll(
-    @NonNull activity: BaseViewXActivity,
+    @NonNull activity: BaseViewActivity,
     statelayout: StateLayout?,
     refresh: SmartRefreshLayout?
 ) {
