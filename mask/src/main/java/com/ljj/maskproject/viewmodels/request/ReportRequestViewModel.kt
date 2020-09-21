@@ -17,7 +17,7 @@ class ReportRequestViewModel : BaseViewModel() {
     val reported get() = _reported
     private val _suggestion by lazy { MutableLiveData<Any>() }
     val suggestion get() = _suggestion
-    suspend fun feedback(
+     fun feedback(
         feedback_content: String,
         phone: String,
         feedback_photo: MutableList<String>
@@ -27,7 +27,7 @@ class ReportRequestViewModel : BaseViewModel() {
         }, liveData = _feedback)
     }
 
-    suspend fun complain(
+     fun complain(
         feedback_content: String,
         phone: String,
         feedback_photo: MutableList<String>
@@ -37,7 +37,7 @@ class ReportRequestViewModel : BaseViewModel() {
         }, liveData = _complain)
     }
 
-    suspend fun reported(
+     fun reported(
          userId: String,
          content: String?,
          type: String?,
@@ -48,7 +48,7 @@ class ReportRequestViewModel : BaseViewModel() {
         }, liveData = _reported)
     }
 
-    suspend fun suggestion(
+     fun suggestion(
          feedback_content: String,
          phone: String,
         feedback_photo: MutableList<String>

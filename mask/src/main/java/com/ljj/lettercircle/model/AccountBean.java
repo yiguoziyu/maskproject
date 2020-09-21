@@ -149,6 +149,24 @@ public class AccountBean implements Serializable {
     private int coupon_num;
     private Long balance;
     private int has_new_coupon;
+    private String join_num;
+    private String reward;
+
+    public String getJoin_num() {
+        return join_num == null ? "" : join_num;
+    }
+
+    public void setJoin_num(String join_num) {
+        this.join_num = join_num;
+    }
+
+    public String getReward() {
+        return reward == null ? "" : reward;
+    }
+
+    public void setReward(String reward) {
+        this.reward = reward;
+    }
 
     private List<String> resident_city;
 
