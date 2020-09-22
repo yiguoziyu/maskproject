@@ -36,9 +36,6 @@ class AuthRequestViewModel : BaseViewModel() {
 
     private val _authenticationInfo by lazy { MutableLiveData<IdentityAuthBean>() }
     val authenticationInfo get() = _authenticationInfo
-    fun getBucketConfig() {
-
-    }
 
     fun authenticationInfoG2() {
         launchWithLoading({

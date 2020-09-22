@@ -36,12 +36,6 @@ class CommonRequestViewModel : BaseViewModel() {
     val userWechat get() = _userWechat
 
 
-    private val _getMyCareList by lazy { MutableLiveData<MutableList<PersonBean>>() }
-    val getMyCareList get() = _getMyCareList
-
-    private val _getCareMeList by lazy { MutableLiveData<MutableList<PersonBean>>() }
-    val getCareMeList get() = _getCareMeList
-
     private val _logout by lazy { MutableLiveData<Any>() }
     val logout get() = _logout
     private val _uploadLogFile by lazy { MutableLiveData<Any>() }
@@ -117,18 +111,6 @@ class CommonRequestViewModel : BaseViewModel() {
         }, liveData = _userWechat)
     }
 
-
-    fun getMyCareList(currentPage: Int) {
-        launchWithStateView({
-            ApiRepository().getMyCareList(currentPage)
-        }, liveData = _getMyCareList)
-    }
-
-    fun getCareMeList(currentPage: Int) {
-        launchWithStateView({
-            ApiRepository().getCareMeList(currentPage)
-        }, liveData = _getCareMeList)
-    }
 
 
     fun logout(is_normal: String) {

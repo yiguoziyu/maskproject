@@ -58,11 +58,6 @@ open class ApiRepository() {
     suspend fun userWechat(@Query("to_user_id") to_user_id: String) = http().userWechat(to_user_id)
 
 
-    suspend fun getMyCareList(@Query("page") currentPage: Int) = http().getMyCareList(currentPage)
-
-    suspend fun getCareMeList(@Query("page") currentPage: Int) = http().getCareMeList(currentPage)
-
-
     suspend fun logout(@Query("is_normal") is_normal: String) = http().logout(is_normal)
 
     suspend fun uploadLogFile(@Query("log") fileUrl: String) = http().uploadLogFile(fileUrl)
@@ -137,12 +132,6 @@ open class ApiRepository() {
 
     suspend fun getPayType(@Query("type") type: String) = http().getPayType(type)
 
-    suspend fun recharge(
-        @Query("recg_id") goodId: Int,
-        @Query("pyed_way") pay_way: String,
-        @Query("platform") platform: String
-    ) = http().recharge(goodId, pay_way, platform)
-
     suspend fun recgWithCoupon(recg_id: String, pyed_way: String, coupon_id: String?) = http().recgWithCoupon(recg_id, pyed_way, PLATFORM, coupon_id)
 
 
@@ -172,9 +161,8 @@ open class ApiRepository() {
     suspend fun register(
         @Query("phone") phone: String,
         @Query("sms_code") smsCode: String,
-        @Query("platform") platform: String,
         @Query("password") password: String
-    ) = http().register(phone, smsCode, platform, password)
+    ) = http().register(phone, smsCode, PLATFORM, password)
 
     suspend fun register(phone: String, smsCode: String) = http().register(phone, smsCode, PLATFORM, phone)
     suspend fun loginByWx(
@@ -248,8 +236,6 @@ open class ApiRepository() {
     suspend fun updateUserPhoto(@Field("photos[]") photos: MutableList<String>?) =
         http().updateUserPhoto(photos)
 
-    suspend fun getRecentVisitor(@Query("page") currentPage: Int) =
-        http().getRecentVisitor(currentPage)
 
     suspend fun getLabel() = http().getLabel()
 
@@ -257,6 +243,13 @@ open class ApiRepository() {
         http().updateLabel(labelList)
 
     suspend fun cloaking(state: Int) = http().cloaking(state)
+
+    suspend fun getRecentVisitor(@Query("page") currentPage: Int) =
+        http().getRecentVisitor(currentPage)
+
+    suspend fun getMyCareList(@Query("page") currentPage: Int) = http().getMyCareList(currentPage)
+
+    suspend fun getCareMeList(@Query("page") currentPage: Int) = http().getCareMeList(currentPage)
     //-----------------------------------------home---------------------------------------------//
 
     suspend fun getHomePageData(

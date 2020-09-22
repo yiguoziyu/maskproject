@@ -44,9 +44,9 @@ class DynamicRequestViewModel : BaseViewModel() {
     val canPublish get() = _canPublish
 
     fun getDynamicsList(
-            @Query("page") currentPage: Int,
-            @Query("other_user_id") userId: String?,
-            @Query("type") type: Int?
+        @Query("page") currentPage: Int,
+        @Query("other_user_id") userId: String?,
+        @Query("type") type: Int?
     ) {
         launchWithStateView({
             ApiRepository().getDynamicsList(currentPage, userId, type)
@@ -74,14 +74,26 @@ class DynamicRequestViewModel : BaseViewModel() {
             DynamicGlobalViewModel.getDyanmicPraiseUnLiveData().postValue(dynamics_id)
         })
     }
-
+    //带有活跃城市
     fun dynamicsPublish(
-            dynamics_content: String,
-            dynamics_photo: MutableList<String>,
-            city: String?
+        dynamics_content: String,
+        dynamics_photo: MutableList<String>,
+        city: String?
     ) {
         launchWithLoading({
             ApiRepository().dynamicsPublish(dynamics_content, dynamics_photo, city)
+        }, {
+            DynamicGlobalViewModel.getDyanmicPublishLiveData().postValue("")
+        })
+    }
+
+
+    fun dynamicsPublish(
+        dynamics_content: String,
+        dynamics_photo: MutableList<String>
+    ) {
+        launchWithLoading({
+            ApiRepository().dynamicsPublish(dynamics_content, dynamics_photo)
         }, {
             DynamicGlobalViewModel.getDyanmicPublishLiveData().postValue("")
         })
@@ -103,13 +115,13 @@ class DynamicRequestViewModel : BaseViewModel() {
 
 
     fun dynamicsVideoPublish(
-            content: String?,
-            cover_url: String?,
-            video_url: String?,
-            city: String?
+        content: String?,
+        cover_url: String?,
+        video_url: String?,
+        city: String?
     ) {
         launchWithLoading({
-            ApiRepository().dynamicsVideoPublish(content, cover_url, video_url,city)
+            ApiRepository().dynamicsVideoPublish(content, cover_url, video_url, city)
         }, {
             DynamicGlobalViewModel.getDyanmicPublishLiveData().postValue("")
         })

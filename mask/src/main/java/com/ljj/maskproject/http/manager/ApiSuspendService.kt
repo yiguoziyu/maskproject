@@ -208,7 +208,7 @@ interface ApiSuspendService {
     suspend fun visitorDynamics(
         @Query("h_user_id") uId: String,
         @Query("page") currentPage: Int
-    ): BaseResponse<Any>
+    ): BaseResponse<MutableList<DynamicsBean>>
 
     @POST(HttpApi.checkPhoneUrl)
     suspend fun checkPhone(@Query("phone") phone: String): BaseResponse<Any>
@@ -304,7 +304,7 @@ interface ApiSuspendService {
     suspend fun getRecentVisitor(@Query("page") currentPage: Int): BaseResponse<MutableList<PersonBean>>
 
     @GET(HttpApi.labelUrl)
-    suspend fun getLabel(): BaseResponse<List<LabelBean>>
+    suspend fun getLabel(): BaseResponse<MutableList<LabelBean>>
 
     @PUT(HttpApi.labelUrl)
     suspend fun updateLabel(@QueryMap labelList: HashMap<String, String>): BaseResponse<Any>
