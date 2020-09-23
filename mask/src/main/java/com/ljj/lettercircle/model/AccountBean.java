@@ -147,7 +147,7 @@ public class AccountBean implements Serializable {
     private int is_privacy_access;
 
     private int coupon_num;
-    private Long balance;
+    private Double balance;
     private int has_new_coupon;
     private String join_num;
     private String reward;
@@ -533,11 +533,11 @@ public class AccountBean implements Serializable {
         this.coupon_num = coupon_num;
     }
 
-    public Long getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 

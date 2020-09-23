@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 @Persistence
 public class InviteWithdrawBean implements Serializable {
-    private Long balance;
+    private Double balance;
     private String tip;
     private int is_set_account;
     private WithdrawInfo withdraw_info;
-    private Long withdraw_total;
-    private Long income_total;
+    private Double withdraw_total;
+    private Double income_total;
     private String withdraw_tip;
 
     public String getWithdraw_tip() {
@@ -22,11 +22,11 @@ public class InviteWithdrawBean implements Serializable {
         this.withdraw_tip = withdraw_tip;
     }
 
-    public Long getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -54,19 +54,19 @@ public class InviteWithdrawBean implements Serializable {
         this.withdraw_info = withdraw_info;
     }
 
-    public Long getWithdraw_total() {
+    public Double getWithdraw_total() {
         return withdraw_total;
     }
 
-    public void setWithdraw_total(Long withdraw_total) {
+    public void setWithdraw_total(Double withdraw_total) {
         this.withdraw_total = withdraw_total;
     }
 
-    public Long getIncome_total() {
+    public Double getIncome_total() {
         return income_total;
     }
 
-    public void setIncome_total(Long income_total) {
+    public void setIncome_total(Double income_total) {
         this.income_total = income_total;
     }
 
