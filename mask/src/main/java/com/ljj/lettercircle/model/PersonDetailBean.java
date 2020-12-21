@@ -25,7 +25,7 @@ public class PersonDetailBean {
      * is_follow : 0
      * dynamics_list : []
      */
-
+    private int online_state;
     private int user_id;
     private String nick_name;
     private int is_pzp;
@@ -65,6 +65,14 @@ public class PersonDetailBean {
     private List<String> resident_city;
     private int can_impression;
     private List<ImpressionBean> impression_list;
+
+    public int getOnline_state() {
+        return online_state;
+    }
+
+    public void setOnline_state(int online_state) {
+        this.online_state = online_state;
+    }
 
     public List<ImpressionBean> getImpression_list() {
         if (impression_list == null) {
