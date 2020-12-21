@@ -22,33 +22,58 @@
     <LinearLayout
         android:id="@+id/rc_img_deck"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:background="#ffffff"
         android:gravity="center_vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
-        <TextView
+        <LinearLayout
             android:id="@+id/rc_system"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/icon_im_system"
             android:gravity="center"
-            android:text="人工客服"
-            android:textColor="#000000"
-            android:textSize="9sp"
-            android:visibility="visible" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/rc_reprot"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_im_system" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="人工客服"
+                android:textColor="#000000"
+                android:textSize="9sp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rc_report"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/icon_im_report"
             android:gravity="center"
-            android:text="认证反馈"
-            android:textColor="#000000"
-            android:textSize="9sp"
-            android:visibility="visible" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_im_report" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="认证反馈"
+                android:textColor="#000000"
+                android:textSize="9sp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>
