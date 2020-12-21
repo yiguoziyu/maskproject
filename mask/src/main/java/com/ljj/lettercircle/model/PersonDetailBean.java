@@ -65,6 +65,15 @@ public class PersonDetailBean {
     private List<String> resident_city;
     private int can_impression;
     private List<ImpressionBean> impression_list;
+    private String login_time;
+
+    public String getLogin_time() {
+        return login_time == null ? "" : login_time;
+    }
+
+    public void setLogin_time(String login_time) {
+        this.login_time = login_time;
+    }
 
     public int getOnline_state() {
         return online_state;
