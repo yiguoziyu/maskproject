@@ -90,7 +90,7 @@ class CommonRequestViewModel : BaseViewModel() {
     }
 
     fun careUser(userId: String) {
-        launchWithLoading({
+        launch({
             ApiRepository().careUser(userId)
         }, {
             CommonGlobalViewModel.getPersonLikeLiveData().postValue(userId)
@@ -98,7 +98,7 @@ class CommonRequestViewModel : BaseViewModel() {
     }
 
     fun careUserDelete(userId: String) {
-        launchWithLoading({
+        launch({
             ApiRepository().careUserDelete(userId)
         },{
             CommonGlobalViewModel.getPersonLikeUnLiveData().postValue(userId)
@@ -157,14 +157,14 @@ class CommonRequestViewModel : BaseViewModel() {
     }
 
     fun setDistanceShow(status: String?) {
-        launchWithLoading({
+        launch({
             ApiRepository().setDistanceShow(status)
         }, liveData = _setDistanceShow)
     }
 
 
     fun cloaking(state: Int) {
-        launchWithLoading({
+        launch({
             ApiRepository().cloaking(state)
         }, {
             _cloaking.value = it
@@ -175,7 +175,7 @@ class CommonRequestViewModel : BaseViewModel() {
      * 取消拉黑
      */
     fun removeFromBlacklist(userId: String) {
-        launchWithLoading({
+        launch({
             ApiRepository().removeFromBlacklist(userId)
         }, {
             CommonGlobalViewModel.getBlackRemoveLiveData().postValue(userId)
@@ -186,7 +186,7 @@ class CommonRequestViewModel : BaseViewModel() {
      * 拉黑
      */
     fun addToBlacklist(userId: String) {
-        launchWithLoading({
+        launch({
             ApiRepository().addToBlacklist(userId)
         }, {
             CommonGlobalViewModel.getBlackAddLiveData().postValue(userId)

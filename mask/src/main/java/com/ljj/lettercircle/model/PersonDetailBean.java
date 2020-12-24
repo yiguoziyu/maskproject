@@ -79,6 +79,7 @@ public class PersonDetailBean {
         return online_state;
     }
 
+
     public void setOnline_state(int online_state) {
         this.online_state = online_state;
     }
